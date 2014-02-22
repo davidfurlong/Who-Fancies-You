@@ -5,4 +5,6 @@ function testAPI() {
   FB.api('/me/posts/', function(response) {
     console.log(response)
   });
-}
+};
+
+
