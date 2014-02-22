@@ -4,28 +4,39 @@ function whoLikesMe(callback) {
   var MESSAGES_WEIGHT = 1;
   var STATUSES_WEIGHT = 1;
 
-  var scoreByUid = {};
-
-  processStatuses(function(result) {
-    scoreByUid = mergeCollections(scoreByUid, result, STATUSES_WEIGHT);
-
-    var entryList = mapToList(scoreByUid);
+  var results = [];
+  var latch = new Latch(2, function() {
+    var result = _.reduce(results, function(m1, c2) {
+      return mergeCollections(m1, c2.map, c2.weight);
+    }, {});
+    
+    var entryList = mapToList(result);
     var sortedList = _.sortBy(entryList, function(entry) {
       return -entry.value;
     })
     callback(sortedList);
   });
+
+  processStatuses(function(result) {
+    results.push({map: result, weight: STATUSES_WEIGHT});
+    latch.complete();
+  });
+  processPhotos(function(result) {
+    results.push({map: result, weight: PHOTOS_WEIGHT});
+    latch.complete();
+  });
 }
 
 function mergeCollections(c1, c2, weight) {
+  var result = {};
   _.each(c2, function(value, key) {
     if (typeof c1[key] != "undefined") {
-      c1[key] = c1[key] + value * weight;
+      result[key] = c1[key] + value * weight;
     } else {
-      c1[key] = value * weight;
+      result[key] = value * weight;
     }
   });
-  return c1;
+  return result;
 }
 
 function mapToList(map) {

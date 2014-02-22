@@ -28,3 +28,14 @@ function processPaging(pagingData, callback) {
     });
   }
 }
+
+function Latch(asyncCount, completionFunc) {
+  this._asyncCount = asyncCount;
+  this._completionFunc = completionFunc;
+}
+Latch.prototype.complete = function() {
+  this._asyncCount--;
+  if (this._asyncCount <= 0){
+    this._completionFunc();
+  }
+};
