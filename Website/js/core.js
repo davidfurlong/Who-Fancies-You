@@ -1,18 +1,33 @@
-function convertProbabilityToWord(prob) {
-	var word;
-	if(prob<30){
-		word = "Unlikely";
-	}
-	else if(30<=prob<50){
-		word = "Theres a chance";
-	}
-	else if(50<=prob<70){
-		word = "Likely";
-	}
-	else {
-		word = "Very Likely";
-	}
+var lastProgressValue = 0;
 
-	return word;
+function gearsGrinding(){
+	$('#connectToFacebook').addClass('working');
+	$('#connectToFacebook').val("");
+
+	changeProgressText('Crunching');
+	changeProgressValue(50);
+	changeProgressValue(100);
 }
 
+function changeProgressText(t){
+	$('#progress-text').html(t);
+}
+function changeProgressValue(v){
+	if(lastProgressValue==0){
+		$('#progress-container').css('display','inherit');
+	}
+	var store=lastProgressValue;
+	lastProgressValue = v;
+	var c = 3*v;
+	$('.ui-progress').animate({
+    width:c
+  }, (v-store)*60, function() {
+    if(v>=100)
+    	showResults();
+  });
+}
+
+function showResults(){
+	//scroll down page
+	
+}

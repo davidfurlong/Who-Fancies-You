@@ -82,15 +82,15 @@ a:after {
 
 #headerwrap {
 	//background: url(../img/header-bg.jpg) no-repeat center top;
-	background: url(../img/newheader.png) no-repeat center top;
+	background: url(../img/dark.png);
 	margin-top: -10px;
 	padding-top:20px;
 	text-align:center;
-	background-attachment: relative;
-	background-position: center center;
+	//background-attachment: relative;
+	//background-position: center center;
 	min-height: 700px;
 	width: 100%;
-	
+	/*
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -100,6 +100,7 @@ a:after {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    */
 }
 
 #headerwrap h1 {

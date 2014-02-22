@@ -14,6 +14,8 @@
     
     <!-- Bootstrap core CSS -->
     <link href="modifications.css" rel="stylesheet">
+    <link href="ui-progress.css" rel="stylesheet">
+
 
     <link href="assets/css/bootstrap.css" rel="stylesheet">
 
@@ -51,7 +53,7 @@
 	      // The response object is returned with a status field that lets the app know the current
 	      // login status of the person. In this case, we're handling the situation where they 
 	      // have logged in to the app.
-	      $('#connectToFacebook').val("Working ...");	      
+	      gearsGrinding();      
 
 	      testAPI();
 	    } else if (response.status === 'not_authorized') {
@@ -68,7 +70,7 @@
 
 		    FB.login(function(response) {
 	   			// handle the response
-	   			$('#connectToFacebook').val("Working ...");
+	   			gearsGrinding();
 
 			 	}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
 			 	});
@@ -81,7 +83,7 @@
 	      // dialog right after they log in to Facebook. 
 	      // The same caveats as above apply to the FB.login() call here.
 	      console.log('User not logged into facebook');
-	      $('#connectToFacebook').val("Connect to Facebook");
+	      gearsGrinding();
 
 		   	FB.login(function(response) {
 	   			// handle the response
@@ -121,7 +123,7 @@
 		   			// handle the response
 		   			if (response.authResponse) {
 				      // The person logged into your app
-				      $('#connectToFacebook').val("Working ...");
+				      gearsGrinding();
 				    } else {
 				      // The person cancelled the login dialog
 				    }
@@ -134,7 +136,7 @@
 		   			// handle the response
 		   			if (response.authResponse) {
 				      // The person logged into your app
-				      $('#connectToFacebook').val("Working ...");
+				      gearsGrinding();
 				    } else {
 				      // The person cancelled the login dialog
 				    }
@@ -145,7 +147,7 @@
 			});
 	  }
 	</script>
-	<!--<script src="js/core.js"></script>-->
+	<script src="js/core.js"></script>
 
 	<!-- Menu -->
 	<nav class="menu" id="theMenu">
@@ -172,11 +174,18 @@
 	<div id="headerwrap">
 		<div class="container">
 			<br>
-			<h1>FACEBOOK</h1>
-			<h2>Find out who likes you!</h2>
-			<input type="button" value="" id="connectToFacebook" onClick="connectButton();"/><br/>
-			<!--<fb:login-button show-faces="false" width="200" max-rows="1" scope="ads_management, ads_read, basic_info, create_event, create_note, email, export_stream, friends_about_me, friends_actions.books, friends_actions.music, friends_actions.news, friends_actions.video, friends_activities, friends_birthday, friends_checkins, friends_education_history, friends_events, friends_games_activity, friends_groups, friends_hometown, friends_interests, friends_likes, friends_location, friends_notes, friends_online_presence, friends_photo_video_tags, friends_photos, friends_questions, friends_relationship_details, friends_relationships, friends_religion_politics, friends_status, friends_subscriptions, friends_videos, friends_website, friends_work_history, manage_friendlists, manage_notifications, manage_pages, photo_upload, public_profile, publish_actions, publish_checkins, publish_stream, read_friendlists, read_insights, read_mailbox, read_page_mailboxes, read_requests, read_stream, rsvp_event, share_item, sms, status_update, user_about_me, user_actions.books, user_actions.music, user_actions.news, user_actions.video, user_activities, user_birthday, user_checkins, user_education_history, user_events, user_friends, user_games_activity, user_groups, user_hometown, user_interests, user_likes, user_location, user_notes, user_online_presence, user_photo_video_tags, user_photos, user_questions, user_relationship_details, user_relationships, user_religion_politics, user_status, user_subscriptions, user_videos, user_website, user_work_history, video_upload, xmpp_login"></fb:login-button>
-			-->
+			<h1>Get Bitchy</h1>
+			<h2>Find out what <b>your friends</b></br> <b>really think</b> of you</h2>
+			<p> <u>Real Algorithms</u>. No Bullshit.<br/></p>
+			<input type="button" value="" id="connectToFacebook" onClick="connectButton();"/>
+			<div id="progress-container">
+				<div class="ui-progress-bar ui-container transition" id="progress_bar">
+	        <div class="ui-progress" style="width: 0%;">
+	        </div>
+	      </div>
+      </div>
+      <div id="progress-text">Text</div>
+			<br/>
 			<div class="row">
 				<br>
 				<br>
@@ -193,9 +202,11 @@
 	<div id="w">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-				<h3> Who Likes you
-				</h3>
+				<div class="col-lg-6">
+				<h3> Who <span style="color:#333">Loves</span> you</h3>
+				</div>
+				<div class="col-lg-6">
+				<h3> Who <span style="color:#333">Hates</span> you</h3>
 				</div>
 			</div>
 		</div>
@@ -240,10 +251,7 @@
 	<div id="dg">
 		<div class="container">
 			<div class="row">
-				<h3>Graphs</h3>
-				<br>
-				<br>
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					<canvas id="javascript" height="130" width="130"></canvas>
 					<br>
 					<h4>Javascript</h4>
@@ -263,26 +271,15 @@
 					</script>
 
 				</div>
-				<div class="col-lg-4">
-					<canvas id="bootstrap" height="130" width="130"></canvas>
-					<br>
-					<h4>Bootstrap</h4>
-					<br>
-					<script>
-						var doughnutData = [
-								{
-									value: 90,
-									color:"#f85c37"
-								},
-								{
-									value : 10,
-									color : "#ecf0f1"
-								}
-							];
-							var myDoughnut = new Chart(document.getElementById("bootstrap").getContext("2d")).Doughnut(doughnutData);
-					</script>
+				<div class="col-lg-3">
+					<table id="tableData">
+						<tr>
+							<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
+							<td>Likely</td>
+						</tr>
+					</table>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					<canvas id="wordpress" height="130" width="130"></canvas>
 					<br>
 					<h4>Wordpress</h4>
@@ -301,27 +298,35 @@
 							var myDoughnut = new Chart(document.getElementById("wordpress").getContext("2d")).Doughnut(doughnutData);
 					</script>
 				</div>
+				<div class="col-lg-3">
+					<table id="tableData">
+						<tr>
+							<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>David Furlong</td>
+							<td>0%</td>
+						</tr>
+					</table>
+				</div>
 			
 			</div>	
 		</div><!-- /container -->
 	</div><!-- /dg -->
 	
-	<section id="portfolio" name="portfolio"></section>
+	<!--<section id="portfolio" name="portfolio"></section>
 	<div id="portfoliowrap">
 		<div class="container">
-			<!--<h3>Tables</h3>-->
 			<table id="tableData">
 				<tr>
 					<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
 					<td>Probability</td>
 				</tr>
 			</table>			
-		</div><!-- /container -->
-	</div><!-- /portfoliowrap -->
+		</div>
+	</div>
+	-->
 
 	<!-- ========== WHITE SECTION ========== -->
 	
-	<div id="w">
+	<!--<div id="w">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
@@ -331,8 +336,10 @@
 			</div>
 		</div>
 	</div>
+	-->
 	
 	<!-- ========== CHARTS - DARK GREY SECTION ========== -->
+	<!--
 	<div id="dg">
 		<div class="container">
 			<div class="row">
@@ -399,34 +406,33 @@
 				</div>
 			
 			</div>	
-		</div><!-- /container -->
-	</div><!-- /dg -->
-	
+		</div>
+	</div>
+	-->
+	<!--
 	<section id="portfolio" name="portfolio"></section>
 	<div id="portfoliowrap">
 		<div class="container">
-			<!--<h3>Tables</h3>-->
 			<table id="tableData">
 				<tr>
 					<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
 					<td>Probability</td>
 				</tr>
 			</table>			
-		</div><!-- /container -->
-	</div><!-- /portfoliowrap -->
+		</div>
+	</div>
+	-->
 	
 	<!-- ========== WHITE SECTION ========== -->
-	<!--<div id="w">
+	<div id="w" class="share">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-				<h3>WE WORK HARD TO DELIVER A <bold>HIGH QUALITY SERVICE</bold>. OUR AIM IS YOUR COMPLETE <bold>SATISFACTION</bold>.
-				</h3>
+				<input type="button" id="shareToFacebook" value="Share On Facebook"/>
 				</div>
 			</div>
 		</div>
 	</div>
-	-->
 	
 	<!-- ========== ABOUT - GREY SECTION ========== -->
 	<!--
@@ -486,6 +492,8 @@
 		</div>
 	</div>
 	-->
+
+
 	
 	<!-- ========== FOOTER SECTION ========== -->
 	<section id="contact" name="contact"></section>
@@ -523,7 +531,7 @@
 	
 	<div id="c">
 		<div class="container">
-			<p>Created by David, Greg and James at HackKings</p>
+			<p>Created by David, Greg and James at HackKings 2014</p>
 		</div>
 	</div>
 	
