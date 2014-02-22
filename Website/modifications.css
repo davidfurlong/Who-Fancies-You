@@ -1,0 +1,20 @@
+#connectToFacebook {
+	margin-top:80px;
+	height:60px;
+	width:300px;
+	font-family:helvetica;
+	font-size:16pt;
+	color:white;
+	border:3px solid white;
+	background:transparent;
+	text-decoration:bold;
+
+	border-radius:5px;
+}
+
+#connectToFacebook:hover {
+	//transition: color 2s, background 2s
+	//-webkit-transition: color 2s, background 2s;
+	background:white;
+	color:rgb(139,163,100);
+}
