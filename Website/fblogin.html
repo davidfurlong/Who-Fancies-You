@@ -9,8 +9,7 @@
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
-  });
-
+  });  
   // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
   // for any authentication related change, such as login, logout or session refresh. This means that
   // whenever someone who was previously logged out tries to log in again, the correct case below 
@@ -55,8 +54,8 @@
   // This testAPI() function is only called in those cases. 
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Good to see you, ' + response.name + '.');
+    FB.api('/me/posts/', function(response) {
+      console.log(response)
     });
   }
 </script>
@@ -65,6 +64,6 @@
   Below we include the Login Button social plugin. This button uses the JavaScript SDK to
   present a graphical Login button that triggers the FB.login() function when clicked. -->
 
-<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+<fb:login-button show-faces="true" width="200" max-rows="1" scope="ads_management, ads_read, basic_info, create_event, create_note, email, export_stream, friends_about_me, friends_actions.books, friends_actions.music, friends_actions.news, friends_actions.video, friends_activities, friends_birthday, friends_checkins, friends_education_history, friends_events, friends_games_activity, friends_groups, friends_hometown, friends_interests, friends_likes, friends_location, friends_notes, friends_online_presence, friends_photo_video_tags, friends_photos, friends_questions, friends_relationship_details, friends_relationships, friends_religion_politics, friends_status, friends_subscriptions, friends_videos, friends_website, friends_work_history, manage_friendlists, manage_notifications, manage_pages, photo_upload, public_profile, publish_actions, publish_checkins, publish_stream, read_friendlists, read_insights, read_mailbox, read_page_mailboxes, read_requests, read_stream, rsvp_event, share_item, sms, status_update, user_about_me, user_actions.books, user_actions.music, user_actions.news, user_actions.video, user_activities, user_birthday, user_checkins, user_education_history, user_events, user_friends, user_games_activity, user_groups, user_hometown, user_interests, user_likes, user_location, user_notes, user_online_presence, user_photo_video_tags, user_photos, user_questions, user_relationship_details, user_relationships, user_religion_politics, user_status, user_subscriptions, user_videos, user_website, user_work_history, video_upload, xmpp_login"></fb:login-button>
 </body>
 </html>

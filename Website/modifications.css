@@ -18,3 +18,26 @@
 	background:white;
 	color:rgb(139,163,100);
 }
+
+#tableData {
+	width:600px;
+	font-family:Raleway;
+	font-weight:300;
+	font-size:16pt;
+	color:white;
+	background:transparent;
+	//overflow:hidden;
+
+	margin:0 auto;
+}
+
+#tableData tr {
+	border-top:1px solid white;
+}
+#tableData tr:first-child {
+	border-top:0px solid white;
+}
+
+tr td:first-child {
+	border-right:1px solid white;
+}
