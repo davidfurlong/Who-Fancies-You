@@ -21,11 +21,7 @@
     <link href="assets/css/main.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/Chart.js"></script>
-	
-	<script src="js/core.js"></script>
-	
-
+	<script src="assets/js/Chart.js"></script>	
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
@@ -34,64 +30,67 @@
   </head>
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu">
-  <div id="fb-root"></div>
-  <script>
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '674401769272836',
-    status     : true, // check login status
-    cookie     : true, // enable cookies to allow the server to access the session
-    xfbml      : true  // parse XFBML
-  });  
-  // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
-  // for any authentication related change, such as login, logout or session refresh. This means that
-  // whenever someone who was previously logged out tries to log in again, the correct case below 
-  // will be handled. 
-  FB.Event.subscribe('auth.authResponseChange', function(response) {
-    // Here we specify what we do with the response anytime this event occurs. 
-    if (response.status === 'connected') {
-      // The response object is returned with a status field that lets the app know the current
-      // login status of the person. In this case, we're handling the situation where they 
-      // have logged in to the app.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // In this case, the person is logged into Facebook, but not into the app, so we call
-      // FB.login() to prompt them to do so. 
-      // In real-life usage, you wouldn't want to immediately prompt someone to login 
-      // like this, for two reasons:
-      // (1) JavaScript created popup windows are blocked by most browsers unless they 
-      // result from direct interaction from people using the app (such as a mouse click)
-      // (2) it is a bad experience to be continually prompted to login upon page load.
-      FB.login();
-    } else {
-      // In this case, the person is not logged into Facebook, so we call the login() 
-      // function to prompt them to do so. Note that at this stage there is no indication
-      // of whether they are logged into the app. If they aren't then they'll see the Login
-      // dialog right after they log in to Facebook. 
-      // The same caveats as above apply to the FB.login() call here.
-      FB.login();
-    }
-  });
-  };
+	  <div id="fb-root"></div>
 
-  // Load the SDK asynchronously
-  (function(d){
-   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-   if (d.getElementById(id)) {return;}
-   js = d.createElement('script'); js.id = id; js.async = true;
-   js.src = "//connect.facebook.net/en_US/all.js";
-   ref.parentNode.insertBefore(js, ref);
-  }(document));
+	<script>
+	  window.fbAsyncInit = function() {
+	  FB.init({
+	    appId      : '674401769272836',
+	    status     : true, // check login status
+	    cookie     : true, // enable cookies to allow the server to access the session
+	    xfbml      : true  // parse XFBML
+	  });  
+	  // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
+	  // for any authentication related change, such as login, logout or session refresh. This means that
+	  // whenever someone who was previously logged out tries to log in again, the correct case below 
+	  // will be handled. 
+	  FB.Event.subscribe('auth.authResponseChange', function(response) {
+	    // Here we specify what we do with the response anytime this event occurs. 
+	    if (response.status === 'connected') {
+	      // The response object is returned with a status field that lets the app know the current
+	      // login status of the person. In this case, we're handling the situation where they 
+	      // have logged in to the app.
+	      testAPI();
+	    } else if (response.status === 'not_authorized') {
+	      // In this case, the person is logged into Facebook, but not into the app, so we call
+	      // FB.login() to prompt them to do so. 
+	      // In real-life usage, you wouldn't want to immediately prompt someone to login 
+	      // like this, for two reasons:
+	      // (1) JavaScript created popup windows are blocked by most browsers unless they 
+	      // result from direct interaction from people using the app (such as a mouse click)
+	      // (2) it is a bad experience to be continually prompted to login upon page load.
+	      FB.login();
+	    } else {
+	      // In this case, the person is not logged into Facebook, so we call the login() 
+	      // function to prompt them to do so. Note that at this stage there is no indication
+	      // of whether they are logged into the app. If they aren't then they'll see the Login
+	      // dialog right after they log in to Facebook. 
+	      // The same caveats as above apply to the FB.login() call here.
+	      FB.login();
+	    }
+	  });
+	  };
 
-  // Here we run a very simple test of the Graph API after login is successful. 
-  // This testAPI() function is only called in those cases. 
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me/posts/', function(response) {
-      console.log(response)
-    });
-  }
-</script>		
+	  // Load the SDK asynchronously
+	  (function(d){
+	   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+	   if (d.getElementById(id)) {return;}
+	   js = d.createElement('script'); js.id = id; js.async = true;
+	   js.src = "//connect.facebook.net/en_US/all.js";
+	   ref.parentNode.insertBefore(js, ref);
+	  }(document));
+
+	  // Here we run a very simple test of the Graph API after login is successful. 
+	  // This testAPI() function is only called in those cases. 
+	  function testAPI() {
+	    console.log('Welcome!  Fetching your information.... ');
+	    FB.api('/me/posts/', function(response) {
+	      console.log(response)
+	    });
+	  }
+	</script>
+	<script src="js/core.js"></script>
+
 	<!-- Menu -->
 	<nav class="menu" id="theMenu">
 		<div class="menu-wrap">
@@ -100,7 +99,6 @@
 			<a href="#home" class="smoothScroll">Home</a>
 			<a href="#about" class="smoothScroll">About</a>
 			<a href="#contact" class="smoothScroll">Contact</a>
-			<a href="#press" class="smoothScroll">Press</a>
 			<a href="#"><i class="icon-facebook"></i></a>
 			<a href="#"><i class="icon-twitter"></i></a>
 			<a href="#"><i class="icon-dribbble"></i></a>
@@ -108,7 +106,7 @@
 		</div>
 		
 		<!-- Menu button -->
-		<div id="menuToggle"><i class="icon-reorder"></i></div>
+		<!--<div id="menuToggle"><i class="icon-reorder"></i></div>-->
 	</nav>
 
 
@@ -120,7 +118,7 @@
 			<br>
 			<h1>FACEBOOK</h1>
 			<h2>Find out who likes you!</h2>
-			<input type="button" value="Connect to Facebook" id="connectToFacebook" onclick="connectButton()"/>
+			<input type="button" value="Connect to Facebook" id="connectToFacebook" onClick="connectButton();"/><br/>
 			<fb:login-button show-faces="false" width="200" max-rows="1" scope="ads_management, ads_read, basic_info, create_event, create_note, email, export_stream, friends_about_me, friends_actions.books, friends_actions.music, friends_actions.news, friends_actions.video, friends_activities, friends_birthday, friends_checkins, friends_education_history, friends_events, friends_games_activity, friends_groups, friends_hometown, friends_interests, friends_likes, friends_location, friends_notes, friends_online_presence, friends_photo_video_tags, friends_photos, friends_questions, friends_relationship_details, friends_relationships, friends_religion_politics, friends_status, friends_subscriptions, friends_videos, friends_website, friends_work_history, manage_friendlists, manage_notifications, manage_pages, photo_upload, public_profile, publish_actions, publish_checkins, publish_stream, read_friendlists, read_insights, read_mailbox, read_page_mailboxes, read_requests, read_stream, rsvp_event, share_item, sms, status_update, user_about_me, user_actions.books, user_actions.music, user_actions.news, user_actions.video, user_activities, user_birthday, user_checkins, user_education_history, user_events, user_friends, user_games_activity, user_groups, user_hometown, user_interests, user_likes, user_location, user_notes, user_online_presence, user_photo_video_tags, user_photos, user_questions, user_relationship_details, user_relationships, user_religion_politics, user_status, user_subscriptions, user_videos, user_website, user_work_history, video_upload, xmpp_login"></fb:login-button>
 			<div class="row">
 				<br>
@@ -134,18 +132,18 @@
 	
 	
 	<!-- ========== WHITE SECTION ========== -->
-	<!--
+	
 	<div id="w">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-				<h3> Add some text here
+				<h3> Who Likes you
 				</h3>
 				</div>
 			</div>
 		</div>
 	</div>
-	-->
+	
 	
 	<!-- ========== SERVICES - GREY SECTION ========== -->
 	<!--
@@ -257,7 +255,103 @@
 			<!--<h3>Tables</h3>-->
 			<table id="tableData">
 				<tr>
-					<td><img src=""/>Person 1</td>
+					<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
+					<td>Probability</td>
+				</tr>
+			</table>			
+		</div><!-- /container -->
+	</div><!-- /portfoliowrap -->
+
+	<!-- ========== WHITE SECTION ========== -->
+	
+	<div id="w">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+				<h3> Facebook "Friends" who probably hate you
+				</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- ========== CHARTS - DARK GREY SECTION ========== -->
+	<div id="dg">
+		<div class="container">
+			<div class="row">
+				<h3>Graphs</h3>
+				<br>
+				<br>
+				<div class="col-lg-4">
+					<canvas id="javascript" height="130" width="130"></canvas>
+					<br>
+					<h4>Javascript</h4>
+					<br>
+					<script>
+						var doughnutData = [
+								{
+									value: 70,
+									color:"#f85c37"
+								},
+								{
+									value : 30,
+									color : "#ecf0f1"
+								}
+							];
+							var myDoughnut = new Chart(document.getElementById("javascript").getContext("2d")).Doughnut(doughnutData);
+					</script>
+
+				</div>
+				<div class="col-lg-4">
+					<canvas id="bootstrap" height="130" width="130"></canvas>
+					<br>
+					<h4>Bootstrap</h4>
+					<br>
+					<script>
+						var doughnutData = [
+								{
+									value: 90,
+									color:"#f85c37"
+								},
+								{
+									value : 10,
+									color : "#ecf0f1"
+								}
+							];
+							var myDoughnut = new Chart(document.getElementById("bootstrap").getContext("2d")).Doughnut(doughnutData);
+					</script>
+				</div>
+				<div class="col-lg-4">
+					<canvas id="wordpress" height="130" width="130"></canvas>
+					<br>
+					<h4>Wordpress</h4>
+					<br>
+					<script>
+						var doughnutData = [
+								{
+									value: 55,
+									color:"#f85c37"
+								},
+								{
+									value : 45,
+									color : "#ecf0f1"
+								}
+							];
+							var myDoughnut = new Chart(document.getElementById("wordpress").getContext("2d")).Doughnut(doughnutData);
+					</script>
+				</div>
+			
+			</div>	
+		</div><!-- /container -->
+	</div><!-- /dg -->
+	
+	<section id="portfolio" name="portfolio"></section>
+	<div id="portfoliowrap">
+		<div class="container">
+			<!--<h3>Tables</h3>-->
+			<table id="tableData">
+				<tr>
+					<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
 					<td>Probability</td>
 				</tr>
 			</table>			
@@ -278,6 +372,7 @@
 	-->
 	
 	<!-- ========== ABOUT - GREY SECTION ========== -->
+	<!--
 	<section id="about" name="about"></section>
 	<div id="g">
 		<div class="container">
@@ -331,8 +426,9 @@
 					</p>
 				</div>
 			</div>
-		</div><!-- /container -->
-	</div><!-- /g -->
+		</div>
+	</div>
+	-->
 	
 	<!-- ========== FOOTER SECTION ========== -->
 	<section id="contact" name="contact"></section>
@@ -343,7 +439,7 @@
 					<br>
 					<div class="col-lg-6">
 						<h3><b>Send Us A Message:</b></h3>
-						<h3>todo@gmail.com</h3>
+						<h3>dvfurlong@gmail.com</h3>
 						<br>
 					</div>
 					
