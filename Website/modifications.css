@@ -1,5 +1,6 @@
 #connectToFacebook {
-	margin-top:80px;
+	padding-top:3px;
+	margin-top:40px;
 	height:60px;
 	width:300px;
 	font-family:helvetica;
@@ -13,8 +14,6 @@
 }
 
 #connectToFacebook:hover {
-	//transition: color 2s, background 2s
-	//-webkit-transition: color 2s, background 2s;
 	background:white;
 	color:rgb(139,163,100);
 }
