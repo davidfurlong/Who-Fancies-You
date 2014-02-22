@@ -1,25 +1,30 @@
-function processStatuses() {
-  var nameToLikeCount = {};
+function processStatuses(callback) {
 
-  FB.api('/me/statuses/?limit=50', function(response) {
-    console.log("Processing status response");
-    var data = response.data;
-    _.each(data, function(status) {
+  FB.api('/me/statuses/?limit=100', function(response) {
+    var uidToLikeCount = {};
+    var statuses = response.data;
+    var statusCount = statuses.length;
+    _.each(statuses, function(status) {
       var likes = status.likes;
       if (typeof likes != "undefined") {
         _.each(likes.data, function(like) {
-          var count = nameToLikeCount[like.id];
+          var count = uidToLikeCount[like.id];
           if (typeof count != "undefined") {
-            nameToLikeCount[like.id] = count + 1;
+            uidToLikeCount[like.id] = count + 1;
           } else {
-            nameToLikeCount[like.id] = 1;
+            uidToLikeCount[like.id] = 1;
           }
         });
       }
     });
 
-    console.log(nameToLikeCount);
+    var uidToLikeProbability = {};
+    if (statusCount > 0) {
+      _.each(uidToLikeCount, function(likeCount, uid) {
+        uidToLikeProbability[uid] = likeCount / statusCount;
+      })
+    }
 
-    var next = response.paging.next;
+    callback(uidToLikeProbability);
   });
 }
