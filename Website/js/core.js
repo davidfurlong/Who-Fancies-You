@@ -1,12 +1,17 @@
 var lastProgressValue = 0;
 
 function gearsGrinding(){
+	whoLikesMe(function(result) {
+	      	console.log("FINAL RESULT:");
+	      	console.log(result);
+	});
 	$('#connectToFacebook').addClass('working');
 	$('#connectToFacebook').val("");
 
 	changeProgressText('Crunching');
 	changeProgressValue(50);
 	changeProgressValue(100);
+
 }
 
 function changeProgressText(t){
@@ -29,5 +34,5 @@ function changeProgressValue(v){
 
 function showResults(){
 	//scroll down page
-	
+
 }

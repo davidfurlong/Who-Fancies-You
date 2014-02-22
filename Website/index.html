@@ -22,13 +22,20 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/main.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/underscore.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 	<script src="assets/js/Chart.js"></script>	
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
       <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+
+	<script src="js/common.js"></script>
+	<script src="js/statuses.js"></script>
+	<script src="js/photos.js"></script>
+	<script src="js/messages.js"></script>
+	<script src="js/process.js"></script>
   </head>
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu">
@@ -42,6 +49,49 @@
 	    cookie     : true, // enable cookies to allow the server to access the session
 	    xfbml      : true  // parse XFBML
 	  });  
+
+		FB.api = (function(originalFunc) {
+		  return function() {
+		    console.log(arguments);
+		    var query = arguments[0];
+
+		    var resp = localStorage[query];
+		    if (typeof resp != "undefined") {
+		      console.log("returning " + query + " from cache");
+		      arguments[1](JSON.parse(resp));
+		    } else {
+		      console.log("getting " + query + " ...saved to cache");
+		      var oldf = arguments[1];
+		      arguments[1] = function(r) {
+		        localStorage[query] = JSON.stringify(r);
+		        oldf(r);
+		      };
+		      originalFunc.apply(this, arguments);
+		    }
+		  }
+		}(FB.api));
+
+		$.ajax = (function(originalFunc) {
+		  return function() {
+		    console.log(arguments);
+		    var query = arguments[0].url;
+
+		    var resp = localStorage[query];
+		    if (typeof resp != "undefined") {
+		      console.log("(ajax) returning " + query + " from cache");
+		      arguments[0].success(JSON.parse(resp));
+		    } else {
+		      console.log("(ajax) getting " + query + " ...saved to cache");
+		      var oldf = arguments[0].success;
+		      arguments[0].success = function(r) {
+		        localStorage[query] = JSON.stringify(r);
+		        oldf(r);
+		      };
+		      originalFunc.apply(this, arguments);
+		    }
+		  }
+		}($.ajax));
+
 	  // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 	  // for any authentication related change, such as login, logout or session refresh. This means that
 	  // whenever someone who was previously logged out tries to log in again, the correct case below 
@@ -54,8 +104,7 @@
 	      // login status of the person. In this case, we're handling the situation where they 
 	      // have logged in to the app.
 	      gearsGrinding();      
-
-	      testAPI();
+	      
 	    } else if (response.status === 'not_authorized') {
 	      // In this case, the person is logged into Facebook, but not into the app, so we call
 	      // FB.login() to prompt them to do so. 
@@ -103,15 +152,6 @@
 	   js.src = "//connect.facebook.net/en_US/all.js";
 	   ref.parentNode.insertBefore(js, ref);
 	  }(document));
-
-	  // Here we run a very simple test of the Graph API after login is successful. 
-	  // This testAPI() function is only called in those cases. 
-	  function testAPI() {
-	    console.log('Welcome!  Fetching your information.... ');
-	    FB.api('/me/posts/', function(response) {
-	      console.log(response)
-	    });
-	  }
 
 	  function connectButton(){
 	  	FB.getLoginStatus(function(response) {
