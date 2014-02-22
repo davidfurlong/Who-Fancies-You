@@ -20,13 +20,19 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/main.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/underscore.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 	<script src="assets/js/Chart.js"></script>	
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
       <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+
+	<script src="js/common.js"></script>
+	<script src="js/statuses.js"></script>
+	<script src="js/messages.js"></script>
+	<script src="js/process.js"></script>
   </head>
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu">
@@ -50,7 +56,9 @@
 	      // The response object is returned with a status field that lets the app know the current
 	      // login status of the person. In this case, we're handling the situation where they 
 	      // have logged in to the app.
-	      testAPI();
+	      whoLikesMe(function(result) {
+	      	console.log(result);
+	      });
 	    } else if (response.status === 'not_authorized') {
 	      // In this case, the person is logged into Facebook, but not into the app, so we call
 	      // FB.login() to prompt them to do so. 
@@ -79,17 +87,7 @@
 	   js.src = "//connect.facebook.net/en_US/all.js";
 	   ref.parentNode.insertBefore(js, ref);
 	  }(document));
-
-	  // Here we run a very simple test of the Graph API after login is successful. 
-	  // This testAPI() function is only called in those cases. 
-	  function testAPI() {
-	    console.log('Welcome!  Fetching your information.... ');
-	    FB.api('/me/posts/', function(response) {
-	      console.log(response)
-	    });
-	  }
 	</script>
-	<script src="js/core.js"></script>
 
 	<!-- Menu -->
 	<nav class="menu" id="theMenu">
