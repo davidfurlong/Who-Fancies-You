@@ -19,7 +19,7 @@ FB.api = (function(originalFunc) {
     console.log(arguments);
     var query = arguments[0];
 
-    var resp = localStorage[query]
+    var resp = localStorage[query];
     if (typeof resp != "undefined") {
       console.log("returning " + query + " from cache");
       arguments[1](JSON.parse(resp));
@@ -35,6 +35,27 @@ FB.api = (function(originalFunc) {
   }
 }(FB.api));
 
+$.ajax = (function(originalFunc) {
+  return function() {
+    console.log(arguments);
+    var query = arguments[0].url;
+
+    var resp = localStorage[query];
+    if (typeof resp != "undefined") {
+      console.log("(ajax) returning " + query + " from cache");
+      arguments[0].success(JSON.parse(resp));
+    } else {
+      console.log("(ajax) getting " + query + " ...saved to cache");
+      var oldf = arguments[0].success;
+      arguments[0].success = function(r) {
+        localStorage[query] = JSON.stringify(r);
+        oldf(r);
+      };
+      originalFunc.apply(this, arguments);
+    }
+  }
+}($.ajax));
+
   // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
   // for any authentication related change, such as login, logout or session refresh. This means that
   // whenever someone who was previously logged out tries to log in again, the correct case below 
@@ -45,7 +66,7 @@ FB.api = (function(originalFunc) {
       // The response object is returned with a status field that lets the app know the current
       // login status of the person. In this case, we're handling the situation where they 
       // have logged in to the app.
-      calculateMessageScore();
+      calculateMessageScore(function(a,b) { console.log(a); console.log(b); });
     } else if (response.status === 'not_authorized') {
       // In this case, the person is logged into Facebook, but not into the app, so we call
       // FB.login() to prompt them to do so. 

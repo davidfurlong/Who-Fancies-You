@@ -8,7 +8,7 @@ function testAPI() {
 };
 
 
-var limit = 50;
+var limit = 300;
 
 //Input: the "paging" node of the json and a callback accepting the responce from FB
 function processPaging(pagingData, callback) {
