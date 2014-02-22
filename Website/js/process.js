@@ -8,3 +8,19 @@ function testAPI() {
 };
 
 
+var limit = 10;
+
+//Input: the "paging" node of the json and a callback accepting the responce from FB
+function processPaging(pagingData, callback) {
+  if(typeof pagingData == "undefined") return;
+  if(typeof pagingData.next != "undefined") {
+      $.ajax({
+        url: pagingData.next,
+        type: "get",
+        success: callback,
+        error:function(){
+          console.log("Error processing paging")
+        }
+    });
+  }
+}
