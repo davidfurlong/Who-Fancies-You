@@ -12,7 +12,7 @@ function processMessages(response) {
   if(typeof messages == "undefined") return;
     for (var i = 0; i < messages.length; i++) {
       var message = messages[i];
-      if (countPeople(message) == 2) { //only parse messages between two people. #nothreesomes
+      if (countPeople(message) == 2) { //only parse messages between two people. #nothreesomes #soconservative
         if(typeof message.comments != "undefined") {
           console.log(message.comments.paging);
           processPaging(message.comments.paging, cb);
