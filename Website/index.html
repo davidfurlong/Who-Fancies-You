@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
 
     <title>HackKings</title>
 
@@ -43,7 +43,8 @@
 	  // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 	  // for any authentication related change, such as login, logout or session refresh. This means that
 	  // whenever someone who was previously logged out tries to log in again, the correct case below 
-	  // will be handled. 
+	  // will be handled.
+	  $('#connectToFacebook').val("Connect to Facebook"); 
 	  FB.Event.subscribe('auth.authResponseChange', function(response) {
 	    // Here we specify what we do with the response anytime this event occurs. 
 	    if (response.status === 'connected') {
@@ -69,7 +70,7 @@
 	   			// handle the response
 	   			$('#connectToFacebook').val("Working ...");
 
-			 	}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, read_page_mailboxes, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
+			 	}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
 			 	});
 		
 
@@ -85,7 +86,7 @@
 		   	FB.login(function(response) {
 	   			// handle the response
 	   			$('#connectToFacebook').val("Working ...");
-		 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, read_page_mailboxes, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
+		 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
 		 		});
 		  
 	    }
@@ -125,7 +126,7 @@
 				      // The person cancelled the login dialog
 				    }
 		   			
-			 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, read_page_mailboxes, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
+			 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
 			 		});
 			  } 
 			  else {
@@ -138,7 +139,7 @@
 				      // The person cancelled the login dialog
 				    }
 		   			
-			 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, read_page_mailboxes, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
+			 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
 			 		});
 			  }
 			});
