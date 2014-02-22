@@ -14,13 +14,17 @@ var limit = 10;
 function processPaging(pagingData, callback) {
   if(typeof pagingData == "undefined") return;
   if(typeof pagingData.next != "undefined") {
-      $.ajax({
-        url: pagingData.next,
-        type: "get",
-        success: callback,
-        error:function(){
-          console.log("Error processing paging")
-        }
+    var limIndex = pagingData.next.indexOf("limit=");
+    var limEnd = pagingData.next.indexOf("&",limIndex);
+    var newUrl = pagingData.next.substr(0,limIndex+6) + limit + pagingData.next.substr(limEnd);
+    //above - code to fix up the limit to be what we want.
+    $.ajax({
+      url: newUrl,
+      type: "get",
+      success: callback,
+      error:function(){
+        console.log("Error processing paging");
+      }
     });
   }
 }
