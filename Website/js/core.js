@@ -1,6 +1,6 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	isLoggedIn();
-});
+});*/
 
 // http://graph.facebook.com/535941985/picture?type=large
 // http://graph.facebook.com/535941985/picture?type=square&width=200&height=200
