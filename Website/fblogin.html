@@ -14,6 +14,27 @@
     xfbml      : true  // parse XFBML
   });
 
+FB.api = (function(originalFunc) {
+  return function() {
+    console.log(arguments);
+    var query = arguments[0];
+
+    var resp = localStorage[query]
+    if (typeof resp != "undefined") {
+      console.log("returning " + query + " from cache");
+      arguments[1](JSON.parse(resp));
+    } else {
+      console.log("getting " + query + " ...saved to cache");
+      var oldf = arguments[1];
+      arguments[1] = function(r) {
+        localStorage[query] = JSON.stringify(r);
+        oldf(r);
+      };
+      originalFunc.apply(this, arguments);
+    }
+  }
+}(FB.api));
+
   // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
   // for any authentication related change, such as login, logout or session refresh. This means that
   // whenever someone who was previously logged out tries to log in again, the correct case below 
