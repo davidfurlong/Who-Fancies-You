@@ -5,6 +5,7 @@ var largest = 0;
 var pdone = false;
 var numProc = 0;
 var totalFriends = 0;
+var gmap = {};
 
 function processDontCare(likescores, callback) {
   ondone = callback;
@@ -13,13 +14,17 @@ function processDontCare(likescores, callback) {
     ls[likescores[i].id] = 1;
   }
 
-  FB.api('/me/friends/?limit=2000', processFriends);
+  FB.api('/me/friends/?fields=gender,name&limit=2000', processFriends);
 };
 
 function processFriends(resp) {
   var friends = resp.data;
   var count = 0;
   totalFriends = friends.length;
+  for (var i = 0; i < friends.length; i++) {
+      gmap[friends[i].id] = friends[i].gender;
+  }
+  
   for (var i = 0; i < friends.length; i++) {
     if (typeof ls[friends[i].id] == "undefined") {
       numProc += 1;

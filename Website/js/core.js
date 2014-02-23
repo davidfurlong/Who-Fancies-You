@@ -7,6 +7,19 @@ function gearsGrinding(){
     		whoDoesntCare(result, function(r2) {
     			//r2 is who doesn't care
                 changeProgressValue(100);
+
+
+                for(i in result) {
+                	if(gopp(gmap[result[i].id]) == myGender)
+                	{
+                		result[i].score = 1 - ((1 - result[i].score) * 0.7);
+                	} 
+                }
+
+                result = _.sortBy(result, function(entry) {
+      				return -entry.score;
+    			})
+
                 showResults(result,r2);
     		})
 
