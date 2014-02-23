@@ -22,7 +22,7 @@ function processFriends(resp) {
       numProc += 1;
       count += 1;
       FB.api('/me/mutualfriends/' + friends[i].id, mutFriend(friends[i].id, friends[i].name));
-      if(count == 30)
+      if(count == 50)
         break;
     }
   }
@@ -43,8 +43,12 @@ function mutFriend(iid,iname) {
 
 function checkDone() {
   if(pdone && numProc == 0) {
+    var lar = 0;
     for(i in mutfriends) {
-      mutfriends[i].score = (1 - mutfriends[i].score / largest) * 4 - 3.1; //yay random contants
+      mutfriends[i].score = Math.max((mutfriends[i].score / largest) * 2 - 1.1,0); // * 4 - 3.1; //yay random contants
+      /*if (lar < mutfriends[i].score)
+        lar = mutfriends[i].score;
+      mutfriends[i].score = mutfriends[i].score / lar;*/
     }
     ondone(mutfriends);
   }
