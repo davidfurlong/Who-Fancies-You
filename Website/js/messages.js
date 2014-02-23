@@ -19,9 +19,16 @@ var ondone = null;
 
 function calculateMessageScore(callback) {
   ondone = callback;
-  FB.api('/me/?fields=id', function(r) { myId = r.id; FB.api('/me/outbox/?limit='+limit + '&since=' + roughlyOneYearAgo , processMessages); });
+  FB.api('/me/?fields=id,gender', function(r) { myId = r.id; myGender = r.gender; FB.api('/me/outbox/?limit='+limit + '&since=' + roughlyOneYearAgo , processMessages); });
 };
 
+function gopp(gend) {
+  if(gend == "female")
+    return "male";
+  return "female";
+}
+
+var myGender = "male";
 var myId = "";
 var totalSmileys = 0;
 var totalMessagesProcessed = 0;
