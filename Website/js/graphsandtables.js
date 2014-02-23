@@ -68,7 +68,7 @@ function makeLoveGraph(result){
 			}
 		]
 	}
-	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false,scaleShowGridLines : false});
+	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false,scaleShowGridLines : false,xAxisLabel : "How much they love you", yAxisLabel : "# of People"});
 }
 
 function makeHateTable(result){
@@ -158,5 +158,5 @@ function makeHateGraph(result){
 			}
 		]
 	}
-	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false,scaleShowGridLines : false});
+	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false,scaleShowGridLines : false, xAxisLabel : "How much they don't care about you", yAxisLabel : "# of People"});
 }

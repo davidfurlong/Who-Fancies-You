@@ -310,7 +310,9 @@ window.Chart = function(context){
 			animation : true,
 			animationSteps : 60,
 			animationEasing : "easeOutQuart",
-			onAnimationComplete : null
+			onAnimationComplete : null,
+			xAxisLabel : "",
+			yAxisLabel : "",
 		};		
 		var config = (options) ? mergeChartConfig(chart.Line.defaults,options) : chart.Line.defaults;
 		
@@ -859,10 +861,10 @@ window.Chart = function(context){
 		}
 		function drawScale(){
 			ctx.fillStyle = "gray";
-			ctx.fillText("# of People",110,10);
+			ctx.fillText(config.yAxisLabel,110,10);
 
 			ctx.fillStyle = "gray";
-			ctx.fillText("How much they love you",width,height-40);
+			ctx.fillText(config.xAxisLabel,width,height-40);
 
 			//X axis line
 			ctx.lineWidth = config.scaleLineWidth;
