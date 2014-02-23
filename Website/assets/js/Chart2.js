@@ -862,7 +862,7 @@ window.Chart = function(context){
 			ctx.fillText("# of People",110,10);
 
 			ctx.fillStyle = "gray";
-			ctx.fillText("How much they love you",width,height-40);
+			ctx.fillText("How much they don't care about you",width,height-40);
 
 			//X axis line
 			ctx.lineWidth = config.scaleLineWidth;

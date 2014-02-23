@@ -9,6 +9,7 @@
 
 body,html {
 	height:100%;
+	top:0px;
 }
 
 body {
@@ -409,7 +410,7 @@ a:after {
 			transition: all .3s ease;
 }
 
-#menuToggle {
+/*#menuToggle {
 	position: absolute;
 	top: 20px;
 	left: 0;
@@ -428,9 +429,19 @@ a:after {
 		-ms-transition: all .1s ease-in-out;
 		 -o-transition: all .1s ease-in-out;
 			transition: all .1s ease-in-out;
+}*/
+
+#menuToggle{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 11;
+	font-size: 14px;
+	color: white;
+	cursor: pointer;
 }
 
-#menuToggle:hover {
+/*#menuToggle:hover {
 	color: #ffffff;
 	background: rgba(0,0,0,0.2);
 	-webkit-transition: all .1s ease-in-out;
@@ -438,7 +449,7 @@ a:after {
 		-ms-transition: all .1s ease-in-out;
 		 -o-transition: all .1s ease-in-out;
 			transition: all .1s ease-in-out;
-}
+}*/
 
 
 /* BUTTON CONF */

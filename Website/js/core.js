@@ -4,13 +4,12 @@ function gearsGrinding(){
 	whoLikesMe(function(result) {
 	      	console.log("FINAL RESULT:");
 	      	console.log(result);
-	      	changeProgressValue(100);
-    		showResults(result);
-
     		whoDoesntCare(result, function(r2) {
     			//r2 is who doesn't care
     			console.log("dont care:");
     			console.log(r2);
+    			changeProgressValue(100);
+    			showResults(result,r2);
     		})
 
 	});
@@ -51,12 +50,9 @@ function scrollToResults(){
 	});
 }
 
-function showResults(result){
-	
-
-
+function showResults(result,r2){
 	makeLoveTable(result);
 	makeLoveGraph(result);
-	makeHateTable(result);
-	makeHateGraph(result);
+	makeHateTable(r2);
+	makeHateGraph(r2);
 }
