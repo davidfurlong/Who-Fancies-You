@@ -1,3 +1,5 @@
+var totalStatusLikes = 0;
+
 function processStatuses(callback) {
 
   FB.api('/me/statuses/?limit=100&since=' + roughlyOneYearAgo, function(response) {
@@ -8,6 +10,7 @@ function processStatuses(callback) {
     _.each(statuses, function(status) {
       var likes = status.likes;
       if (typeof likes != "undefined") {
+        totalStatusLikes += likes.data.length;
         _.each(likes.data, function(like) {
           if (typeof uidToLikeCount[like.id] != "undefined") {
             uidToLikeCount[like.id].score = uidToLikeCount[like.id].score + 1;
