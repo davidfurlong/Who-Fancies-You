@@ -160,6 +160,7 @@
 	  	localStorage.clear();
 	  	FB.logout(function(response) {
 			  $('#connectToFacebook').val("Connect to Facebook");
+			  $('#connectToFacebook').removeClass('working');
 			  $('#logout').hide();
 			  $('#progress-container').hide();
 			  $('#loveTable').html('<table></table>');
