@@ -1,6 +1,6 @@
 function processPhotos(callback) {
 
-  FB.api('/me/photos/?limit=500&since=' + oneYearAgo, function(response) {
+  FB.api('/me/photos/?limit=500&since=' + roughlyOneYearAgo, function(response) {
     var uidToLikeCount = {};
     var photos = response.data;
     var photoCount = photos.length;

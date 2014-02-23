@@ -19,7 +19,7 @@ var ondone = null;
 
 function calculateMessageScore(callback) {
   ondone = callback;
-  FB.api('/me/?fields=id', function(r) { myId = r.id; FB.api('/me/outbox/?limit='+limit + '&since=' + oneYearAgo , processMessages); });
+  FB.api('/me/?fields=id', function(r) { myId = r.id; FB.api('/me/outbox/?limit='+limit + '&since=' + roughlyOneYearAgo , processMessages); });
 };
 
 var myId = "";

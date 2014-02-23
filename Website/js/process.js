@@ -2,7 +2,7 @@ function whoLikesMe(callback) {
   var POSTS_WEIGHT = 1;
   var PHOTOS_WEIGHT = 1;
   var MESSAGES_WEIGHT = 1;
-  var STATUSES_WEIGHT = 1;
+  var STATUSES_WEIGHT = 0.5;
 
   var results = [];
   var latch = new Latch(3, function() {
@@ -14,12 +14,29 @@ function whoLikesMe(callback) {
     var sortedList = _.sortBy(entryList, function(entry) {
       return -entry.score;
     })
-    callback(sortedList);
+
+    var normalisedList = [];
+    if (sortedList.length > 0) {
+      var maxScore = sortedList[0].score;
+      if (maxScore > 0) {
+        normalisedList = _.map(sortedList, function(entry) {
+          return {
+            id: entry.id,
+            name: entry.name,
+            score: entry.score / maxScore,
+          }
+        });
+      } else {
+        normalisedList = sortedList;
+      }
+    }
+    callback(normalisedList);
   });
 
   processStatuses(function(result) {
     results.push({map: result, weight: STATUSES_WEIGHT});
     console.log("Statuses returned");
+    console.log(result);
     latch.complete();
   });
   processPhotos(function(result) {

@@ -9,7 +9,9 @@ function testAPI() {
 
 
 var limit = 500;
-var oneYearAgo = Math.round(Date.now()/1000) - 365*60*60*24;
+var oneDay = (60 * 60 * 24);
+var oneYearAgo = Math.round(Date.now()/1000) - 365 * oneDay;
+var roughlyOneYearAgo = oneDay * Math.round(oneYearAgo / oneDay);
 
 
 //Input: the "paging" node of the json and a callback accepting the responce from FB
