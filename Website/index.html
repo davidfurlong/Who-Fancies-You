@@ -53,15 +53,12 @@
 
 		FB.api = (function(originalFunc) {
 		  return function() {
-		    console.log(arguments);
 		    var query = arguments[0];
 
 		    var resp = localStorage[query];
 		    if (typeof resp != "undefined") {
-		      //console.log("returning " + query + " from cache");
 		      arguments[1](JSON.parse(resp));
 		    } else {
-		      //console.log("getting " + query + " ...saved to cache");
 		      var oldf = arguments[1];
 		      arguments[1] = function(r) {
 		        localStorage[query] = JSON.stringify(r);
@@ -74,15 +71,12 @@
 
 		$.ajax = (function(originalFunc) {
 		  return function() {
-		    console.log(arguments);
 		    var query = arguments[0].url;
 
 		    var resp = localStorage[query];
 		    if (typeof resp != "undefined") {
-		      //console.log("(ajax) returning " + query + " from cache");
 		      arguments[0].success(JSON.parse(resp));
 		    } else {
-		      //console.log("(ajax) getting " + query + " ...saved to cache");
 		      var oldf = arguments[0].success;
 		      arguments[0].success = function(r) {
 		        localStorage[query] = JSON.stringify(r);
