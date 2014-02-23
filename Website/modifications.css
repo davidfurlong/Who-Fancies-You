@@ -120,6 +120,8 @@ td span {
 	font-size: 14px;
 	color: white;
 	cursor: pointer;
+	background:transparent;
+	border:0px;
 }
 
 .row h3 {

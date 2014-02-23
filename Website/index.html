@@ -44,9 +44,6 @@
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu">
 	  <div id="fb-root"></div>
-	<div id="logout menuToggle">
-		Logout
-		</div>
 	<script>
 	  window.fbAsyncInit = function() {
 	  FB.init({
@@ -159,7 +156,7 @@
 	   ref.parentNode.insertBefore(js, ref);
 	  }(document));
 
-	  function logout(){
+	  function logoutButton(){
 	  	localStorage.clear();
 	  	FB.logout(function(response) {
 			  $('#connectToFacebook').val("Connect to Facebook");
@@ -216,10 +213,6 @@
 			    // the user isn't logged in to Facebook.
 			  }
 			});
-	  }
-
-	  function logoutButton(){
-	  	FB.logout(function f(r) { });
 	  }
 
 	  function connectButton(){
