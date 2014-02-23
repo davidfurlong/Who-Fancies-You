@@ -431,15 +431,6 @@ a:after {
 			transition: all .1s ease-in-out;
 }*/
 
-#menuToggle{
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	z-index: 11;
-	font-size: 14px;
-	color: white;
-	cursor: pointer;
-}
 
 /*#menuToggle:hover {
 	color: #ffffff;

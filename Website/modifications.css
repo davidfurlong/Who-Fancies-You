@@ -63,7 +63,7 @@ h1 {
 }
 
 
-#tableData {
+table {
 	width:600px;
 	font-family:Raleway;
 	font-weight:300;
@@ -76,20 +76,20 @@ h1 {
 	margin:0 auto;
 }
 
-#tableData tr {
+table tr {
 	//border-top:1px solid white;
 }
-#tableData tr:first-child td:first-child img {
+table tr:first-child td:first-child img {
 	//border-top:0px solid white;
 	border:2px solid #ffd700;
 }
 
-#tableData tr:nth-child(2) td:first-child img {
+table tr:nth-child(2) td:first-child img {
 	//border-top:0px solid white;
 	border:2px solid silver;
 }
 
-#tableData tr:nth-child(3) td:first-child img {
+table tr:nth-child(3) td:first-child img {
 	//border-top:0px solid white;
 	border:2px solid #cd7f32;
 }
@@ -110,6 +110,16 @@ td {
 td span {
 	padding-left:10px;
 
+}
+
+#logout{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 11;
+	font-size: 14px;
+	color: white;
+	cursor: pointer;
 }
 
 .row h3 {
