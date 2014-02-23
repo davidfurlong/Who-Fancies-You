@@ -17,7 +17,7 @@ function makeLoveTable(result){
 
 			$('#loveTable table').append('<tr><td><img class="person-pic" src="http://graph.facebook.com/' 
 				+ result[iter].id+'/picture?type=square&width=200&height=200"/></td><td>'  
-				+ result[iter].name+'</td><td>' + prob + '</td><td>' + (100 * v).toFixed(0) + '%</td></tr>');	
+				+ result[iter].name+'</td><td>' + prob + '</td><td><b>' + (100 * v).toFixed(0) + '%</b></td></tr>');	
 		}
 	}
 }
@@ -84,7 +84,7 @@ function makeHateTable(result){
 
 			$('#hateTable table').append('<tr><td><img class="person-pic" src="http://graph.facebook.com/' 
 				+ result[i].id+'/picture?type=square&width=200&height=200"/></td><td>'  
-				+ result[i].name+'</td><td>' + prob + '</td><td>' + (100 * v).toFixed(0) + '%</td></tr>');	
+				+ result[i].name+'</td><td>' + prob + '</td><td><b>' + (100 * v).toFixed(0) + '%</b></td></tr>');	
 	}	
 
 /*
@@ -112,7 +112,7 @@ function makeHateTable(result){
 */
 }
 function makeHateGraph(result){
-	$('#hateGraph').append("<h3 style='margin-bottom:40px;margin-top:40px;'>Processed Data from the last year</h3>");
+	$('#hateGraph').append("<h3 style='margin-bottom:40px;margin-top:40px;'>Processed Data</h3>");
 	$('#hateGraph').append("<h4 style='margin-bottom:20px'><span style='padding-right:10px'>"+totalMessagesProcessed+"</span>Messages</h4>");
 	$('#hateGraph').append("<h4 style='margin-bottom:20px'><span style='padding-right:10px'>"+totalFriends+"</span>Friends</h4>");
 	var i = (totalStatusLikes+totalPhotoLikes);
