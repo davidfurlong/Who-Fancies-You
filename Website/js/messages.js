@@ -50,7 +50,7 @@ function procDone() {
     var clargest = 0;
     for (var i in friendconvsstarted) {
       if(friendconvtotal[i] > 5 && i != myId) {
-        friendcovscore[i] = (friendconvsstarted[i] / friendconvtotal[i]) + friendconvtotal[i] / totalMessagesProcessed;
+        friendcovscore[i] = (friendconvsstarted[i] / friendconvtotal[i]) + (friendconvtotal[i] / totalMessagesProcessed);
         if(friendcovscore[i] > clargest)
           clargest = friendcovscore[i];
       }
@@ -150,7 +150,6 @@ function processMessage(from,message) {
     totalMessagesProcessed += 1;
 
   var pcount = friendcharmap[from.id];
-  changeProgressText(from.name);
   if (typeof pcount == "undefined") {
     pcount = 0;
   }
