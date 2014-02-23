@@ -8,8 +8,9 @@ function makeLoveTable(result){
 	var i = result.length;
 	var t = 0;
 	if(i>0) t = result[0].score;
+	var min = Math.min(result.length,8);
 
-	for(var iter=0;iter<8;iter++){
+	for(var iter=0;iter<min;iter++){
 		if(iter==0 || result[iter].score>0.10){
 			var prob = "";
 			var v = result[iter].score;

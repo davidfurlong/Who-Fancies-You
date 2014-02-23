@@ -25,7 +25,7 @@
   width:300px;
   margin:0 auto;
   position:relative;
-  top:-48px;
+  top:-52px;
   left:0px;
   display:none;
   
@@ -36,7 +36,7 @@
   z-index:1 !important;
   /* Usual setup stuff */
   position: relative;
-  height: 36px;
+  height: 44px;
   /* Pad right so we don't cover the borders when fully progressed */
   padding-right: 2px;
   /* For browser that don't support gradients, we'll set a blanket background colour */
@@ -78,7 +78,7 @@
   display: block;
   overflow: hidden;
   /* Height should be 2px less than .ui-progress-bar so as to not cover borders and give it a look of being inset */
-  height: 36px;
+  height: 44px;
   /* Rounds the ends, we specify an excessive amount to make sure they are completely rounded */
   /* Adjust to your liking, and don't forget to adjust to the same amount in .ui-progress-bar */
   border-radius:3px;
