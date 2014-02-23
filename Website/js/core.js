@@ -34,6 +34,7 @@ function changeProgressValue(v){
 		  	if(v>=100){
 		  		changeProgressText("Complete");
 		  		scrollToResults();
+		  		$('#progress-text').show();
 		  	}
 	 	});
 	}
