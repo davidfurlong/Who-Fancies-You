@@ -1,13 +1,14 @@
 var totalStatusLikes = 0;
-
+var totalStatuses = 0;
 function processStatuses(callback) {
 
-  FB.api('/me/statuses/?limit=100&since=' + roughlyOneYearAgo, function(response) {
+  FB.api('/me/statuses/?limit=200&since=' + roughlyOneYearAgo, function(response) {
     var uidToLikeCount = {};
     var statuses = response.data;
     var statusCount = statuses.length;
     var maxScore = -1;
     _.each(statuses, function(status) {
+      totalStatuses += 1;
       var likes = status.likes;
       if (typeof likes != "undefined") {
         totalStatusLikes += likes.data.length;
