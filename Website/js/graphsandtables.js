@@ -112,10 +112,12 @@ function makeHateTable(result){
 */
 }
 function makeHateGraph(result){
-
+	console.log(result);
 	var d = [];
 	for(var i=0;i<result.length;i++){
 		if(isNaN(result[i].score))
+			d.push((0).toFixed(3));
+		else if(result[i].score<0)
 			d.push((0).toFixed(3));
 		else
 			d.push((100*result[i].score).toFixed(3));
