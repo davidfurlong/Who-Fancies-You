@@ -73,7 +73,7 @@ function makeLoveGraph(result){
 			}
 		]
 	}
-	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false,scaleShowGridLines : false,xAxisLabel : "How much they love you", yAxisLabel : "# of People"});
+	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false,scaleShowGridLines : false,xAxisLabel : "How much they fancy you", yAxisLabel : "# of People"});
 }
 
 function makeHateTable(result){
