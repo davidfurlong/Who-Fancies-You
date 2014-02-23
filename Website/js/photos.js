@@ -16,12 +16,12 @@ function processPhotos(callback) {
       var likes = photo.likes;
       if (typeof likes != "undefined") {
         _.each(likes.data, function(like) {
-          var count = uidToLikeCount[like.id];
           if (!taggedIds[like.id]) {
-            if (typeof count != "undefined") {
-              uidToLikeCount[like.id] = count + 1;
+            if (typeof uidToLikeCount[like.id] != "undefined") {
+              uidToLikeCount[like.id].score = uidToLikeCount[like.id].score + 1;
             } else {
-              uidToLikeCount[like.id] = 1;
+              uidToLikeCount[like.id] = {name: like.name};
+              uidToLikeCount[like.id].score = 1;
             }
           }
         });
@@ -30,12 +30,10 @@ function processPhotos(callback) {
 
     var uidToLikeProbability = {};
     if (photoCount > 0) {
-      _.each(uidToLikeCount, function(likeCount, uid) {
-        uidToLikeProbability[uid] = likeCount / photoCount;
+      _.each(uidToLikeCount, function(value, uid) {
+        uidToLikeProbability[uid] = {name: value.name, score: value.score / photoCount};
       })
     }
-
-    console.log(photoCount + " photos processed");
 
     callback(uidToLikeProbability);
   });

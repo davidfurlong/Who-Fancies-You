@@ -8,11 +8,11 @@ function processStatuses(callback) {
       var likes = status.likes;
       if (typeof likes != "undefined") {
         _.each(likes.data, function(like) {
-          var count = uidToLikeCount[like.id];
-          if (typeof count != "undefined") {
-            uidToLikeCount[like.id] = count + 1;
+          if (typeof uidToLikeCount[like.id] != "undefined") {
+            uidToLikeCount[like.id].score = uidToLikeCount[like.id].score + 1;
           } else {
-            uidToLikeCount[like.id] = 1;
+            uidToLikeCount[like.id] = {name: like.name};
+            uidToLikeCount[like.id].score = 1;
           }
         });
       }
@@ -20,9 +20,9 @@ function processStatuses(callback) {
 
     var uidToLikeProbability = {};
     if (statusCount > 0) {
-      _.each(uidToLikeCount, function(likeCount, uid) {
-        uidToLikeProbability[uid] = likeCount / statusCount;
-      })
+      _.each(uidToLikeCount, function(value, uid) {
+        uidToLikeProbability[uid] = {name: value.name, score: value.score / statusCount};
+      });
     }
 
     callback(uidToLikeProbability);
