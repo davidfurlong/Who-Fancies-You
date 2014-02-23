@@ -29,14 +29,17 @@ function changeProgressValue(v){
 	}
 	var store=lastProgressValue;
 	lastProgressValue = v;
-	var c = 3*v;
-	$('.ui-progress').animate({
-    width:c
-  }, (v-store)*20, function() {
-  	changeProgressText("Complete");
-  	scrollToResults();
-
-  });
+	if(store<v){
+		var c = 3*v;
+		$('.ui-progress').animate({
+	    	width:c
+	  	}, (v-store)*20, function() {
+		  	if(v>=100){
+		  		changeProgressText("Complete");
+		  		scrollToResults();
+		  	}
+	 	});
+	}
 }
 
 function scrollToResults(){

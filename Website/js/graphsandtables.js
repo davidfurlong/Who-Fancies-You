@@ -70,7 +70,7 @@ function makeLoveGraph(result){
 		]
 	}
 	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false});
-	//ctx.fillText("Freq",0,0);
+	ctx.fillText("Freq",0,0);
 }
 function makeHateTable(result){
 	//$('#hateTable')
