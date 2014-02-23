@@ -4,6 +4,8 @@ var mutfriends = {};
 var largest = 0;
 var pdone = false;
 var numProc = 0;
+var totalFriends = 0;
+
 function processDontCare(likescores, callback) {
   ondone = callback;
 
@@ -17,6 +19,7 @@ function processDontCare(likescores, callback) {
 function processFriends(resp) {
   var friends = resp.data;
   var count = 0;
+  totalFriends = friends.length;
   for (var i = 0; i < friends.length; i++) {
     if (typeof ls[friends[i].id] == "undefined") {
       numProc += 1;
