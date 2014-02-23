@@ -160,6 +160,7 @@
 	  }(document));
 
 	  function logout(){
+	  	localStorage.clear();
 	  	FB.logout(function(response) {
 			  $('#connectToFacebook').val("Connect to Facebook");
 			  $('#logout').hide();
