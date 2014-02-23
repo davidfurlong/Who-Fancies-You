@@ -1,7 +1,7 @@
 function whoLikesMe(callback) {
   var POSTS_WEIGHT = 1;
   var PHOTOS_WEIGHT = 1;
-  var MESSAGES_WEIGHT = 0.2;
+  var MESSAGES_WEIGHT = 1;
   var STATUSES_WEIGHT = 1;
 
   var results = [];

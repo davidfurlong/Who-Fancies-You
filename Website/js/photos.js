@@ -4,6 +4,7 @@ function processPhotos(callback) {
     var uidToLikeCount = {};
     var photos = response.data;
     var photoCount = photos.length;
+    var maxScore = -1;
     _.each(photos, function(photo) {
       var tags = photo.tags;
       var taggedIds = {};
@@ -23,6 +24,7 @@ function processPhotos(callback) {
               uidToLikeCount[like.id] = {name: like.name};
               uidToLikeCount[like.id].score = 1;
             }
+            maxScore = Math.max(maxScore, uidToLikeCount[like.id].score);
           }
         });
       }
@@ -31,8 +33,8 @@ function processPhotos(callback) {
     var uidToLikeProbability = {};
     if (photoCount > 0) {
       _.each(uidToLikeCount, function(value, uid) {
-        uidToLikeProbability[uid] = {name: value.name, score: value.score / photoCount};
-      })
+        uidToLikeProbability[uid] = {name: value.name, score: value.score / maxScore};
+      });
     }
 
     callback(uidToLikeProbability);
