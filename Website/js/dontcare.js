@@ -14,7 +14,7 @@ function processDontCare(likescores, callback) {
     ls[likescores[i].id] = 1;
   }
 
-  FB.api('/me/friends/?fields=gender&limit=2000', processFriends);
+  FB.api('/me/friends/?fields=gender,name&limit=2000', processFriends);
 };
 
 function processFriends(resp) {
