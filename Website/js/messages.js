@@ -28,7 +28,7 @@ function gopp(gend) {
   return "female";
 }
 
-var myGender = "male";
+var myGender = "male"; //will be replaced later
 var myId = "";
 var totalSmileys = 0;
 var totalMessagesProcessed = 0;

@@ -8,19 +8,9 @@ function gearsGrinding(){
     			//r2 is who doesn't care
                 changeProgressValue(100);
 
-                //gender bias (experimental - should be removed)
-                for(i in result) {
-                	if(gopp(gmap[result[i].id]) == myGender)
-                	{
-                		result[i].oscore = result[i].score;
-                		result[i].score = 1 - ((1 - result[i].score) * 0.7);
-                	} 
-                }
-
                 result = _.sortBy(result, function(entry) {
       				return -entry.score;
     			})
-    			//end code that should be removed.
 
                 showResults(result,r2);
     		})
