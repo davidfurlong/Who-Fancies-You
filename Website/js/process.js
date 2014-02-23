@@ -11,7 +11,7 @@ function whoLikesMe(callback) {
   var ihr;
   var latch = new Latch(3, function() {
     progress = 5;
-    changeProgressValue(progress);
+    //changeProgressValue(progress);
 
     var result = _.reduce(results, function(m1, c2) {
       return mergeCollections(m1, c2.map, c2.weight);
@@ -61,7 +61,7 @@ function whoLikesMe(callback) {
     }
 
     progress = 100;
-    changeProgressValue(progress);
+    //changeProgressValue(progress);
     callback(normalisedList, badNormalisedList);
   });
 
@@ -69,7 +69,7 @@ function whoLikesMe(callback) {
     results.push({map: result, weight: STATUSES_WEIGHT});
     console.log("Statuses returned");
     progress += 20;
-    changeProgressValue(progress);
+    //changeProgressValue(progress);
     latch.complete();
   });
   processPhotos(function(likeResult, inverseHateResult) {
@@ -78,14 +78,14 @@ function whoLikesMe(callback) {
     latch.complete();
     ihr = inverseHateResult;
     progress += 20;
-    changeProgressValue(progress);
+    //changeProgressValue(progress);
   });
   calculateMessageScore(function(result, certainty) {
     console.log("Messages returned");
     results.push({map: result, weight: MESSAGES_WEIGHT});
     latch.complete();
     progress += 20;
-    changeProgressValue(progress);
+    //changeProgressValue(progress);
   });
 }
 
@@ -116,6 +116,5 @@ function whoDoesntCare(likescores, callback) {
       return entry.score;
     });
     callback(dontcaresorted);
-
   });
 }
