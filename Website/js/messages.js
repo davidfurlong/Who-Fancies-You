@@ -1,4 +1,6 @@
 // Look at your last 500 messages rank friends based upon positive terms in the messages, who initiated conversations and [not implemented] num of messages, average reply time
+//#noideahowthisworks
+
 var friendsmileymap = {};
 var friendcharmap = {};
 
@@ -17,8 +19,7 @@ var ondone = null;
 
 function calculateMessageScore(callback) {
   ondone = callback;
-  console.log('Fetching message score information');
-  FB.api('/me/?fields=id', function(r) { myId = r.id; FB.api('/me/outbox/?limit='+limit, processMessages); });
+  FB.api('/me/?fields=id', function(r) { myId = r.id; FB.api('/me/outbox/?limit='+limit + '&since=' + roughlyOneYearAgo , processMessages); });
 };
 
 var myId = "";
@@ -44,13 +45,12 @@ function processMessages(response) {
 function procDone() {
   procsgoing -= 1;
   if(done && procsgoing == 0) {
-    console.log("ready to compute!");
     var largest = 0;
 
     var clargest = 0;
     for (var i in friendconvsstarted) {
-      if(friendconvtotal[i] > 5) {
-        friendcovscore[i] = friendconvsstarted[i] / friendconvtotal[i];
+      if(friendconvtotal[i] > 5 && i != myId) {
+        friendcovscore[i] = (friendconvsstarted[i] / friendconvtotal[i]) + (friendconvtotal[i] / totalMessagesProcessed);
         if(friendcovscore[i] > clargest)
           clargest = friendcovscore[i];
       }
@@ -63,7 +63,9 @@ function procDone() {
     }
 
     for (var i in friendsmileymap) {
-      friendscoremap[i] = friendsmileymap[i] / friendcharmap[i];
+      if(i == myId)
+        continue;
+      friendscoremap[i] = (friendsmileymap[i] / friendcharmap[i]) * ((friendconvtotal[i] + 10) / (totalMessagesProcessed + 10));
       if(friendscoremap[i] > largest)
         largest = friendscoremap[i];
     }
@@ -78,12 +80,21 @@ function procDone() {
         friendscoremap[i] = {name: friendmap[i], score: (friendscoremap[i] / largest)};
       }
     }
+
+    for (var i in friendsmileymap) {
+      if(typeof friendcovscore[i] != "undefined") {
+        friendscoremap[i].score = (friendscoremap[i].score + friendcovscore[i]) / 2;
+        if(isNaN(friendscoremap[i].score))
+          friendscoremap[i].score = 0;
+      }
+      else {
+        friendscoremap[i].score = friendscoremap[i].score * 2 / 3; //reduce it a bit
+        if(isNaN(friendscoremap[i].score))
+          friendscoremap[i].score = 0;
+      }
+    }
+
     ondone(friendscoremap,certainty);
-  }
-  else
-  {
-    if(done)
-    console.log("not ready - still waiting on " + procsgoing + "processes");
   }
 }
 
@@ -105,23 +116,23 @@ function processComments(comments)
 
 
     if(prevdate != null) {
-      var tstart = friendconvtotal[comment.from.name];
+      var tstart = friendconvtotal[comment.from.id];
       if (typeof tstart == "undefined") {
         tstart = 0;
       }
 
-      friendconvtotal[comment.from.name] = tstart + 1;
+      friendconvtotal[comment.from.id] = tstart + 1;
 
 
         var timediff = newDate - prevdate;
-        if(timediff > 72000000) {
+        if(timediff > 50000000) {
 
-          var cstart = friendconvsstarted[comment.from.name];
+          var cstart = friendconvsstarted[comment.from.id];
           if (typeof cstart == "undefined") {
             cstart = 0;
           }
 
-          friendconvsstarted[comment.from.name] = cstart + 1;
+          friendconvsstarted[comment.from.id] = cstart + 1;
         }
     }
     var comment = obj[i];
@@ -132,10 +143,11 @@ function processComments(comments)
 }
 
 function processMessage(from,message) {
-  if(typeof friendmap[from.id] == "undefined")
+  if(typeof friendmap[from.id] == "undefined") {
     friendmap[from.id] = from.name;
-  //console.log(message);
-  totalMessagesProcessed += 1;
+  }
+  if(from.id != myId)
+    totalMessagesProcessed += 1;
 
   var pcount = friendcharmap[from.id];
   if (typeof pcount == "undefined") {
