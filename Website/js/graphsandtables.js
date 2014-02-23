@@ -1,3 +1,7 @@
+function init(){
+	window.scrollTo(0, 0);
+}
+
 // Make Tables and Graphs
 
 function makeLoveTable(result){
@@ -112,7 +116,7 @@ function makeHateTable(result){
 */
 }
 function makeHateGraph(result){
-	$('#hateGraph').append("<h3 style='margin-bottom:40px;margin-top:40px;'>Processed Data</h3>");
+	$('#hateGraph').append("<h3 style='margin-bottom:40px;margin-top:40px;'>Processed Interactions</h3>");
 	$('#hateGraph').append("<h4 style='margin-bottom:20px'><span style='padding-right:10px'>"+totalMessagesProcessed+"</span>Messages</h4>");
 	$('#hateGraph').append("<h4 style='margin-bottom:20px'><span style='padding-right:10px'>"+totalFriends+"</span>Friends</h4>");
 	var i = (totalStatusLikes+totalPhotoLikes);

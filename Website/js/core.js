@@ -57,6 +57,8 @@ function changeProgressValue(v){
 
 function scrollToResults(){
 	//scroll down page
+
+	$("body").css("overflow","visible");
 	var pos = $('#w').position().top;
 	var body = $("html, body");
 	body.animate({scrollTop:pos}, '650', 'swing', function() { 

@@ -41,7 +41,7 @@
 	<script src="js/graphsandtables.js"></script>
   </head>
 
-  <body data-spy="scroll" data-offset="0" data-target="#theMenu">
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu" style="overflow:hidden" onload="init();">
 	  <div id="fb-root"></div>
 	<script>
 	  window.fbAsyncInit = function() {
@@ -183,13 +183,13 @@
 			     method: 'stream.publish',
 			     message: 'Find out what your friends really think of you',
 			     attachment: {
-			       name: 'Who likes you?',
+			       name: 'Who Fancies you?',
 			       caption: 'Discover what your friends don\'t want you to know with Who Likes You!',
 			       description: (
 			       		'1. '+$('#loveTable tr:first-child td:nth-child(2)').html()+
 			       		' 2. ' +$('#loveTable tr:nth-child(2) td:nth-child(2)').html()+
 			       		' 3. ' +$('#loveTable tr:nth-child(3) td:nth-child(2)').html()+
-			         'Who Likes You is a service that analyses your friends ' +
+			         'Who Fancies You is a service that analyses your friends ' +
 			         'facebook interactions and tells you which of your friends are ' +
 			         'interested in you based on Machine Learning and Natural Language Processing data analysis techniques.'
 			       ),

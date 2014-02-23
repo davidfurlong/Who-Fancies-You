@@ -127,10 +127,10 @@ td span {
 
 #logout{
 	position: absolute;
-	top: 0px;
-	right: 0px;
+	top: 5px;
+	right: 40px;
 	z-index: 11;
-	font-size: 14px;
+	font-size: 16px;
 	color: white;
 	cursor: pointer;
 	background:transparent;
