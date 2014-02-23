@@ -36,6 +36,7 @@
 	<script src="js/photos.js"></script>
 	<script src="js/messages.js"></script>
 	<script src="js/process.js"></script>
+	<script src="js/graphsandtables.js"></script>
   </head>
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu">
@@ -96,7 +97,7 @@
 	  // for any authentication related change, such as login, logout or session refresh. This means that
 	  // whenever someone who was previously logged out tries to log in again, the correct case below 
 	  // will be handled.
-	  $('#connectToFacebook').val("Connect to Facebook"); 
+	  
 	  FB.Event.subscribe('auth.authResponseChange', function(response) {
 	    // Here we specify what we do with the response anytime this event occurs. 
 	    if (response.status === 'connected') {
@@ -132,16 +133,20 @@
 	      // dialog right after they log in to Facebook. 
 	      // The same caveats as above apply to the FB.login() call here.
 	      console.log('User not logged into facebook');
-	      gearsGrinding();
+	     	$('#connectToFacebook').val("Connect to Facebook"); 
+
 
 		   	FB.login(function(response) {
 	   			// handle the response
-	   			$('#connectToFacebook').val("Working ...");
+	   			gearsGrinding();
+
 		 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
 		 		});
 		  
 	    }
 	  });
+	  $('#connectToFacebook').val("Connect to Facebook");
+
 	  };
 
 	  // Load the SDK asynchronously
@@ -195,6 +200,7 @@
 			<h1 class="logo"><a href="index.html#home">HackKings</a></h1>
 			<i class="icon-remove menu-close"></i>
 			<a href="#home" class="smoothScroll">Home</a>
+			<a href="#results" class="smoothScroll" id="resultslink">Results</a>
 			<a href="#about" class="smoothScroll">About</a>
 			<a href="#contact" class="smoothScroll">Contact</a>
 			<a href="#"><i class="icon-facebook"></i></a>
@@ -214,7 +220,7 @@
 	<div id="headerwrap">
 		<div class="container">
 			<br>
-			<h1>Get Bitchy</h1>
+			<h1>Pure Data</h1>
 			<h2>Find out what <b>your friends</b></br> <b>really think</b> of you</h2>
 			<p> <u>Real Algorithms</u>. No Bullshit.<br/></p>
 			<input type="button" value="" id="connectToFacebook" onClick="connectButton();"/>
@@ -224,7 +230,7 @@
 	        </div>
 	      </div>
       </div>
-      <div id="progress-text">Text</div>
+      <div id="progress-text"></div>
 			<br/>
 			<div class="row">
 				<br>
@@ -291,7 +297,7 @@
 	<div id="dg">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-3" id="loveGraph">
 					<canvas id="javascript" height="130" width="130"></canvas>
 					<br>
 					<h4>Javascript</h4>
@@ -311,15 +317,12 @@
 					</script>
 
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-3" id="loveTable">
 					<table id="tableData">
-						<tr>
-							<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
-							<td>Likely</td>
-						</tr>
+						
 					</table>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-3" id="hateGraph">
 					<canvas id="wordpress" height="130" width="130"></canvas>
 					<br>
 					<h4>Wordpress</h4>
@@ -338,7 +341,7 @@
 							var myDoughnut = new Chart(document.getElementById("wordpress").getContext("2d")).Doughnut(doughnutData);
 					</script>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-3" id="hateTable">
 					<table id="tableData">
 						<tr>
 							<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>David Furlong</td>
