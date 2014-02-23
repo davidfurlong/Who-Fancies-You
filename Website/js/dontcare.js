@@ -1,12 +1,16 @@
 var ondone = null;
-var ls = null;
+var ls = {};
 var mutfriends = {};
 var largest = 0;
 var pdone = false;
 var numProc = 0;
 function processDontCare(likescores, callback) {
   ondone = callback;
-  ls = likescores;
+
+  for(i in likescores) {
+    ls[likescores[i].id] = 1;
+  }
+
   FB.api('/me/friends/?limit=2000', processFriends);
 };
 
@@ -34,7 +38,6 @@ function processFriends(resp) {
 
 
 function checkDone() {
-  console.log(pdone)
   if(pdone && numProc == 0) {
     for(i in mutfriends) {
       mutfriends[i].score = (1 - mutfriends[i].score / largest) * 4 - 3.1; //yay random contants
