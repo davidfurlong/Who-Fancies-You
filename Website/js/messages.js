@@ -170,7 +170,7 @@ function countPeople(message) {
 
 function countSmileys(str) {
   if(typeof str == "undefined") return 0;
-  var res = str.match(/((:|;)(-|)(D|\)|P)|<3|xxx|xx|love|good|nice|happy|haha)/g);
+  var res = str.match(/((:|;)(-|)(D|\)|P)|<3|xx|happy|aw|haha)/g);
   if(res == null) return 0;
   totalSmileys += res.length;
   return res.length;

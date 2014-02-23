@@ -1,8 +1,8 @@
 function whoLikesMe(callback) {
   var POSTS_WEIGHT = 1;
-  var PHOTOS_WEIGHT = 1;
+  var PHOTOS_WEIGHT = 0.5;
   var MESSAGES_WEIGHT = 1;
-  var STATUSES_WEIGHT = 0.4;
+  var STATUSES_WEIGHT = 1;
   var MAX_SCORE = PHOTOS_WEIGHT + MESSAGES_WEIGHT + STATUSES_WEIGHT;
 
   var progress = 0;
@@ -45,6 +45,7 @@ function whoLikesMe(callback) {
   processStatuses(function(result) {
     results.push({map: result, weight: STATUSES_WEIGHT});
     console.log("Statuses returned");
+    console.log(result);
     progress += 20;
     changeProgressValue(progress);
     latch.complete();
@@ -52,6 +53,7 @@ function whoLikesMe(callback) {
   processPhotos(function(result) {
     results.push({map: result, weight: PHOTOS_WEIGHT});
     console.log("Photos returned");
+    console.log(result);
     progress += 20;
     changeProgressValue(progress);
     latch.complete();
@@ -59,6 +61,7 @@ function whoLikesMe(callback) {
   calculateMessageScore(function(result, certainty) {
     results.push({map: result, weight: MESSAGES_WEIGHT});
     console.log("Messages returned");
+    console.log(result);
     progress += 20;
     changeProgressValue(progress);
     latch.complete();
