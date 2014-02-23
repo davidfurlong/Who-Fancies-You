@@ -22,7 +22,7 @@ function processFriends(resp) {
       numProc += 1;
       count += 1;
       FB.api('/me/mutualfriends/' + friends[i].id, mutFriend(friends[i].id, friends[i].name));
-      if(count == 30)
+      if(count == 50)
         break;
     }
   }
