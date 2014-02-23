@@ -27,7 +27,7 @@ function changeProgressText(t){
 }
 function changeProgressValue(v){
 	if(lastProgressValue==0){
-		$('#progress-container').css('display','inherit');
+		$('#progress-container').css('visibility','visible');
 	}
 	var store=lastProgressValue;
 	lastProgressValue = v;
@@ -37,6 +37,7 @@ function changeProgressValue(v){
 	    	width:c
 	  	}, (v-store)*20, function() {
 		  	if(v>=100){
+		  		$("body").css("overflow","visible");
 		  		changeProgressText("Complete");
 		  		scrollToResults();
 		  		$('#progress-text').show();

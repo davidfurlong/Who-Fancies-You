@@ -27,7 +27,7 @@
   position:relative;
   top:-52px;
   left:0px;
-  display:none;
+  visibility: hidden;
   
 }
 
