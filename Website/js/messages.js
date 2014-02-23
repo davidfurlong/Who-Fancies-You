@@ -19,7 +19,7 @@ var ondone = null;
 
 function calculateMessageScore(callback) {
   ondone = callback;
-  FB.api('/me/?fields=id', function(r) { myId = r.id; FB.api('/me/outbox/?limit='+limit, processMessages); });
+  FB.api('/me/?fields=id', function(r) { myId = r.id; FB.api('/me/outbox/?limit='+limit + '&since='+oneYearAgo, processMessages); });
 };
 
 var myId = "";
@@ -143,13 +143,15 @@ function processComments(comments)
 }
 
 function processMessage(from,message) {
-  if(typeof friendmap[from.id] == "undefined")
+  if(typeof friendmap[from.id] == "undefined") {
     friendmap[from.id] = from.name;
+  }
   //console.log(message);
   if(from.id != myId)
     totalMessagesProcessed += 1;
 
   var pcount = friendcharmap[from.id];
+  changeProgressText(from.name);
   if (typeof pcount == "undefined") {
     pcount = 0;
   }

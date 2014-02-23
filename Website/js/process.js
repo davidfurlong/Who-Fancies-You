@@ -18,22 +18,16 @@ function whoLikesMe(callback) {
   });
 
   processStatuses(function(result) {
-    console.log("statuses");
-    console.log(result);
     results.push({map: result, weight: STATUSES_WEIGHT});
     console.log("Statuses returned");
     latch.complete();
   });
   processPhotos(function(result) {
-    console.log("photos");
-    console.log(result);
     results.push({map: result, weight: PHOTOS_WEIGHT});
     console.log("Photos returned");
     latch.complete();
   });
   calculateMessageScore(function(result, certainty) {
-    console.log("messages");
-    console.log(result);
     results.push({map: result, weight: MESSAGES_WEIGHT});
     console.log("Messages returned");
     latch.complete();
