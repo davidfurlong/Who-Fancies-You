@@ -112,11 +112,11 @@ function makeHateTable(result){
 */
 }
 function makeHateGraph(result){
-	$('#hateGraph').append("<h3>Processed Data from the last year</h3>");
-	$('#hateGraph').append("<span>Messages   "+totalMessagesProcessed+"</span>");
-	$('#hateGraph').append("<span>Friends  "+totalFriends+"</span>");
-	$('#hateGraph').append("<span>Statuses   "+totalMessagesProcessed+"</span>");
-	$('#hateGraph').append("<span>Likes on your content  "+totalFriends+"</span>");
+	$('#hateGraph').append("<h3 style='margin-bottom:40px'>Processed Data from the last year</h3>");
+	$('#hateGraph').append("<h4 style='margin-bottom:20px'><span style='padding-right:10px'>"+totalMessagesProcessed+"</span>Messages</h4>");
+	$('#hateGraph').append("<h4 style='margin-bottom:20px'><span style='padding-right:10px'>"+totalFriends+"</span>Friends</h4>");
+	$('#hateGraph').append("<h4 style='margin-bottom:20px'><span style='padding-right:10px'>"+totalStatuses+"</span>Statuses</h4>");
+	$('#hateGraph').append("<h4 style='margin-bottom:20px'><span style='padding-right:10px'>"+(totalStatusLikes+totalPhotoLikes)+"</span>Likes on your</h4>");
 	/*console.log(result);
 	var d = [];
 	for(var i=0;i<result.length;i++){
