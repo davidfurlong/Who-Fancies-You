@@ -72,8 +72,21 @@ function makeLoveGraph(result){
 	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false});
 	ctx.fillText("Freq",0,0);
 }
+
 function makeHateTable(result){
-	//$('#hateTable')
+	for (var i = result.length - 1; i >= 0 && i >= result.length - 8; i--) {
+			var prob = "";
+			var v = result[i].score;
+			if(v>0.75) prob = "Obsessed";
+			else if(v>0.55) prob = "Very Likely";
+			else if(v>0.35) prob = "Likely";
+			else if(v>0.20) prob = "Perhaps";
+			else prob = "Unlikely";
+
+			$('#hateTable table').append('<tr><td><img class="person-pic" src="http://graph.facebook.com/' 
+				+ result[i].id+'/picture?type=square&width=200&height=200"/></td><td>'  
+				+ result[i].name+'</td><td>' + prob + '</td><td>' + (100 * v).toFixed(0) + '%</td></tr>');	
+	}	
 }
 function makeHateGraph(result){
 	//$('#hateGraph')

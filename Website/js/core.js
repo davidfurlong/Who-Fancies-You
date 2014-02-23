@@ -1,16 +1,13 @@
 var lastProgressValue = 0;
 
 function gearsGrinding(){
-	whoLikesMe(function(result) {
-	      	console.log("FINAL RESULT:");
-	      	console.log(result);
-	      	changeProgressValue(100);
-    		showResults(result);
+	whoLikesMe(function(result, badResult) {
+	      	console.log("FINAL RESULT IS IN!");
 
     		whoDoesntCare(result, function(r2) {
     			//r2 is who doesn't care
-    			console.log("dont care:");
-    			console.log(r2);
+                changeProgressValue(100);
+                showResults(result,r2);
     		})
 
 	});
@@ -51,12 +48,11 @@ function scrollToResults(){
 	});
 }
 
-function showResults(result){
-	
-
-
+function showResults(result,badresult){
+    console.log(result);
+    console.log(badresult);
 	makeLoveTable(result);
 	makeLoveGraph(result);
-	makeHateTable(result);
-	makeHateGraph(result);
+	makeHateTable(badresult);
+	makeHateGraph(badresult);
 }
