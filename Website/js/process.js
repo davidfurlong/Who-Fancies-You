@@ -27,7 +27,6 @@ function whoLikesMe(callback) {
   processStatuses(function(result) {
     results.push({map: result, weight: STATUSES_WEIGHT});
     console.log("Statuses returned");
-    console.log(result["633530715"]);
     progress += 20;
     changeProgressValue(progress);
     latch.complete();
@@ -35,7 +34,6 @@ function whoLikesMe(callback) {
   processPhotos(function(result) {
     results.push({map: result, weight: PHOTOS_WEIGHT});
     console.log("Photos returned");
-    console.log(result["633530715"]);
     progress += 20;
     changeProgressValue(progress);
     latch.complete();
@@ -43,7 +41,6 @@ function whoLikesMe(callback) {
   calculateMessageScore(function(result, certainty) {
     results.push({map: result, weight: MESSAGES_WEIGHT});
     console.log("Messages returned");
-    console.log(result["633530715"]);
     progress += 20;
     changeProgressValue(progress);
     latch.complete();
