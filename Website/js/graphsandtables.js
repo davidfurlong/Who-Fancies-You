@@ -9,16 +9,15 @@ function makeLoveTable(result){
 		if(iter==0 || result[iter].score>0.10){
 			var prob = "";
 			var v = result[iter].score;
-			if(v>0.9) prob = "Obsessed";
-			else if(v>0.2) prob = "Very Likely";
-			else if(v>0.15) prob = "Likely";
-			else if(v>0.10) prob = "Perhaps";
+			if(v>0.75) prob = "Obsessed";
+			else if(v>0.55) prob = "Very Likely";
+			else if(v>0.35) prob = "Likely";
+			else if(v>0.20) prob = "Perhaps";
 			else prob = "Unlikely";
 
-
-			//result[iter].name.length;
-
-			$('#loveTable table').append('<tr><td><img class="person-pic" src="http://graph.facebook.com/'+result[iter].id+'/picture?type=square&width=200&height=200"/></td><td>'+result[iter].name+'</td><td>'+prob+'</td></tr>');	
+			$('#loveTable table').append('<tr><td><img class="person-pic" src="http://graph.facebook.com/' 
+				+ result[iter].id+'/picture?type=square&width=200&height=200"/></td><td>'  
+				+ result[iter].name+'</td><td>' + prob + '</td><td>' + (100 * v).toFixed(0) + '%</td></tr>');	
 		}
 	}
 }

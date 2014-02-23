@@ -2,7 +2,8 @@ function whoLikesMe(callback) {
   var POSTS_WEIGHT = 1;
   var PHOTOS_WEIGHT = 1;
   var MESSAGES_WEIGHT = 1;
-  var STATUSES_WEIGHT = 0.5;
+  var STATUSES_WEIGHT = 0.4;
+  var MAX_SCORE = PHOTOS_WEIGHT + MESSAGES_WEIGHT + STATUSES_WEIGHT;
 
   var progress = 0;
 
@@ -28,7 +29,7 @@ function whoLikesMe(callback) {
           return {
             id: entry.id,
             name: entry.name,
-            score: entry.score / maxScore,
+            score: entry.score / MAX_SCORE,
           }
         });
       } else {
