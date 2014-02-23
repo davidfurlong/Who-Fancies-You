@@ -37,7 +37,7 @@ function changeProgressValue(v){
 	    	width:c
 	  	}, (v-store)*20, function() {
 		  	if(v>=100){
-		  		$("body").css("overflow","visible");
+		  		//$("body").css("overflow","visible");
 		  		changeProgressText("Complete");
 		  		scrollToResults();
 		  		$('#progress-text').show();
