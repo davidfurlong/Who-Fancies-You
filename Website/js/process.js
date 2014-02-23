@@ -44,12 +44,8 @@ function whoLikesMe(callback) {
   processStatuses(function(result) {
     results.push({map: result, weight: STATUSES_WEIGHT});
     console.log("Statuses returned");
-<<<<<<< HEAD
-    console.log(result);
-=======
     progress += 20;
     changeProgressValue(progress);
->>>>>>> FETCH_HEAD
     latch.complete();
   });
   processPhotos(function(result) {
