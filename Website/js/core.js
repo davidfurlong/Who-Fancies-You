@@ -11,7 +11,6 @@ function gearsGrinding(){
 	$('#connectToFacebook').val("");
 
 	changeProgressText('Crunching');
-
 }
 
 function changeProgressText(t){
@@ -37,7 +36,7 @@ function scrollToResults(){
 	//scroll down page
 	var pos = $('#w').position().top;
 	var body = $("html, body");
-	body.animate({scrollTop:pos}, '500', 'swing', function() { 
+	body.animate({scrollTop:pos}, '800', 'swing', function() { 
    		
 	});
 }
