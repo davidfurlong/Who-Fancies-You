@@ -8,9 +8,10 @@ function whoLikesMe(callback) {
   var progress = 0;
 
   var results = [];
+  var ihr;
   var latch = new Latch(3, function() {
     progress = 5;
-    changeProgressValue(progress);
+    //changeProgressValue(progress);
 
     var result = _.reduce(results, function(m1, c2) {
       return mergeCollections(m1, c2.map, c2.weight);
@@ -19,6 +20,12 @@ function whoLikesMe(callback) {
     var entryList = mapToList(result);
     var sortedList = _.sortBy(entryList, function(entry) {
       return -entry.score;
+    })
+
+    var badResult = mergeCollections(result, ihr, 1);
+    var badEntryList = mapToList(badResult);
+    var badSortedList = _.sortBy(badEntryList, function(entry) {
+      return entry.score;
     })
 
     var normalisedList = [];
@@ -37,34 +44,48 @@ function whoLikesMe(callback) {
       }
     }
 
+    var badNormalisedList = [];
+    if (badSortedList.length > 0) {
+      var maxScore = badSortedList[0].score;
+      if (maxScore > 0) {
+        badNormalisedList = _.map(badSortedList, function(entry) {
+          return {
+            id: entry.id,
+            name: entry.name,
+            score: entry.score / (MAX_SCORE + 1),
+          }
+        });
+      } else {
+        badNormalisedList = badSortedList;
+      }
+    }
+
     progress = 100;
-    changeProgressValue(progress);
-    callback(normalisedList);
+    //changeProgressValue(progress);
+    callback(normalisedList, badNormalisedList);
   });
 
   processStatuses(function(result) {
     results.push({map: result, weight: STATUSES_WEIGHT});
     console.log("Statuses returned");
-    console.log(result);
     progress += 20;
-    changeProgressValue(progress);
+    //changeProgressValue(progress);
     latch.complete();
   });
-  processPhotos(function(result) {
-    results.push({map: result, weight: PHOTOS_WEIGHT});
+  processPhotos(function(likeResult, inverseHateResult) {
+    results.push({map: likeResult, weight: PHOTOS_WEIGHT});
     console.log("Photos returned");
-    console.log(result);
-    progress += 20;
-    changeProgressValue(progress);
     latch.complete();
+    ihr = inverseHateResult;
+    progress += 20;
+    //changeProgressValue(progress);
   });
   calculateMessageScore(function(result, certainty) {
-    results.push({map: result, weight: MESSAGES_WEIGHT});
     console.log("Messages returned");
-    console.log(result);
-    progress += 20;
-    changeProgressValue(progress);
+    results.push({map: result, weight: MESSAGES_WEIGHT});
     latch.complete();
+    progress += 20;
+    //changeProgressValue(progress);
   });
 }
 
@@ -90,5 +111,10 @@ function mapToList(map) {
 }
 
 function whoDoesntCare(likescores, callback) {
-  processDontCare(likescores,callback);
+  processDontCare(likescores,function(res) {
+    var dontcaresorted = _.sortBy(res, function(entry) {
+      return entry.score;
+    });
+    callback(dontcaresorted);
+  });
 }

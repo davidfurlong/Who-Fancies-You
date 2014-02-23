@@ -33,11 +33,11 @@
       <script src="assets/js/html5shiv.js"></script>
       <script src="assets/js/respond.min.js"></script>
     <![endif]-->
-    <script src="js/dontcare.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/statuses.js"></script>
 	<script src="js/photos.js"></script>
 	<script src="js/messages.js"></script>
+	<script src="js/dontcare.js"></script>
 	<script src="js/process.js"></script>
 	<script src="js/graphsandtables.js"></script>
   </head>
@@ -103,6 +103,9 @@
 	      // The response object is returned with a status field that lets the app know the current
 	      // login status of the person. In this case, we're handling the situation where they 
 	      // have logged in to the app.
+
+	     $("#progress-text").after('<input type="button" value="Logout" id="logout" onClick="logoutButton();"/>');
+
 	      gearsGrinding();      
 	      
 	    } else if (response.status === 'not_authorized') {
@@ -157,6 +160,7 @@
 	  }(document));
 
 	  function logout(){
+	  	localStorage.clear();
 	  	FB.logout(function(response) {
 			  $('#connectToFacebook').val("Connect to Facebook");
 			  $('#logout').hide();
@@ -212,6 +216,10 @@
 			    // the user isn't logged in to Facebook.
 			  }
 			});
+	  }
+
+	  function logoutButton(){
+	  	FB.logout(function f(r) { });
 	  }
 
 	  function connectButton(){

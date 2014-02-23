@@ -70,7 +70,24 @@ function makeLoveGraph(result){
 	}
 	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false,scaleShowGridLines : false});
 }
+
 function makeHateTable(result){
+
+	for (var i = result.length - 1; i >= 0 && i >= result.length - 8; i--) {
+			var prob = "";
+			var v = result[i].score;
+			if(v>0.75) prob = "Why are you friends?";
+			else if(v>0.55) prob = "Doesn't really know you";
+			else if(v>0.35) prob = "Barely knows you";
+			else if(v>0.20) prob = "Might know you";
+			else prob = "Knows you";
+
+			$('#hateTable table').append('<tr><td><img class="person-pic" src="http://graph.facebook.com/' 
+				+ result[i].id+'/picture?type=square&width=200&height=200"/></td><td>'  
+				+ result[i].name+'</td><td>' + prob + '</td><td>' + (100 * v).toFixed(0) + '%</td></tr>');	
+	}	
+
+/*
 	var i = result.length;
 	var t = 0;
 	if(i>0) t = result[0].score;
@@ -92,6 +109,7 @@ function makeHateTable(result){
 				+ result[iter].name+'</td><td>' + prob + '</td><td>' + (100 * v).toFixed(0) + '%</td></tr>');	
 		}
 	}
+*/
 }
 function makeHateGraph(result){
 
