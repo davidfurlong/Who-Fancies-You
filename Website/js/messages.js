@@ -1,9 +1,17 @@
-// Look at your last 500 messages rank friends based upon positive terms in the messages, who initiated conversations: not implemented [num of messages, average reply time]
+// Look at your last 500 messages rank friends based upon positive terms in the messages, who initiated conversations and [not implemented] num of messages, average reply time
 var friendsmileymap = {};
 var friendcharmap = {};
 
 var friendscoremap = {};
+
+var friendconvsstarted = {}
+var friendconvtotal = {};
+
+var friendcovscore = {};
+
 var certainty = 0;
+
+var friendmap = {};
 
 var ondone = null;
 
@@ -37,7 +45,23 @@ function procDone() {
   procsgoing -= 1;
   if(done && procsgoing == 0) {
     console.log("ready to compute!");
-    largest = 0;
+    var largest = 0;
+
+    var clargest = 0;
+    for (var i in friendconvsstarted) {
+      if(friendconvtotal[i] > 5) {
+        friendcovscore[i] = friendconvsstarted[i] / friendconvtotal[i];
+        if(friendcovscore[i] > clargest)
+          clargest = friendcovscore[i];
+      }
+    }
+
+    if(clargest != 0) {
+      for (var i in friendcovscore) {
+        friendcovscore[i] = friendcovscore[i] / clargest;
+      }
+    }
+
     for (var i in friendsmileymap) {
       friendscoremap[i] = friendsmileymap[i] / friendcharmap[i];
       if(friendscoremap[i] > largest)
@@ -51,7 +75,7 @@ function procDone() {
     //normalise
     if(largest != 0) {
       for (var i in friendsmileymap) {
-        friendscoremap[i] = friendscoremap[i] / largest;
+        friendscoremap[i] = {name: friendmap[i], score: (friendscoremap[i] / largest)};
       }
     }
     ondone(friendscoremap,certainty);
@@ -75,14 +99,41 @@ function processConversation(conv) {
 function processComments(comments)
 {
   var obj = comments.data;
+  var prevdate = null;
   for (var i = 0; i < obj.length; i++) {
+    var newDate = new Date(obj[i].created_time);
+
+
+    if(prevdate != null) {
+      var tstart = friendconvtotal[comment.from.name];
+      if (typeof tstart == "undefined") {
+        tstart = 0;
+      }
+
+      friendconvtotal[comment.from.name] = tstart + 1;
+
+
+        var timediff = newDate - prevdate;
+        if(timediff > 72000000) {
+
+          var cstart = friendconvsstarted[comment.from.name];
+          if (typeof cstart == "undefined") {
+            cstart = 0;
+          }
+
+          friendconvsstarted[comment.from.name] = cstart + 1;
+        }
+    }
     var comment = obj[i];
     processMessage(comment.from,comment.message)
+    prevdate = newDate;
   }
   procDone();
 }
 
 function processMessage(from,message) {
+  if(typeof friendmap[from.id] == "undefined")
+    friendmap[from.id] = from.name;
   //console.log(message);
   totalMessagesProcessed += 1;
 

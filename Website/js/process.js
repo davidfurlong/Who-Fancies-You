@@ -9,10 +9,10 @@ function whoLikesMe(callback) {
     var result = _.reduce(results, function(m1, c2) {
       return mergeCollections(m1, c2.map, c2.weight);
     }, {});
-    
+
     var entryList = mapToList(result);
     var sortedList = _.sortBy(entryList, function(entry) {
-      return -entry.value;
+      return -entry.score;
     })
     callback(sortedList);
   });
@@ -38,9 +38,10 @@ function mergeCollections(c1, c2, weight) {
   var result = c1;
   _.each(c2, function(value, key) {
     if (typeof c1[key] != "undefined") {
-      result[key] = c1[key] + value * weight;
+      result[key].score = c1[key] + value.score * weight;
     } else {
-      result[key] = value * weight;
+      result[key] = {name: value.name};
+      result[key].score = value.score * weight;
     }
   });
   return result;
@@ -49,7 +50,7 @@ function mergeCollections(c1, c2, weight) {
 function mapToList(map) {
   var entryList = [];
   _.each(map, function(value, key) {
-    entryList.push({key: key, value: value});
+    entryList.push({id: key, name: value.name, score: value.score});
   });
   return entryList;
 }
