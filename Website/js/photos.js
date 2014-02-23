@@ -1,3 +1,5 @@
+var totalPhotoLikes = 0;
+
 function processPhotos(callback) {
 
   FB.api('/me/photos/?limit=500&since=' + roughlyOneYearAgo, function(response) {
@@ -24,7 +26,9 @@ function processPhotos(callback) {
       }
 
       var likes = photo.likes;
+      console.log(likes);
       if (typeof likes != "undefined") {
+        totalPhotoLikes += likes.data.length;
         _.each(likes.data, function(like) {
           if (!taggedIds[like.id]) {
             if (typeof uidToLikeCount[like.id] != "undefined") {
