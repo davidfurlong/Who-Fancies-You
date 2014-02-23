@@ -1,6 +1,6 @@
 function processStatuses(callback) {
 
-  FB.api('/me/statuses/?limit=100', function(response) {
+  FB.api('/me/statuses/?limit=100&since=' + oneYearAgo, function(response) {
     var uidToLikeCount = {};
     var statuses = response.data;
     var statusCount = statuses.length;
