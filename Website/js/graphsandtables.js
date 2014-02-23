@@ -54,7 +54,6 @@ function makeLoveGraph(result){
 	//var ctx = newG.get(0).getContext("2d");
 	//Get context with jQuery - using jQuery's .get() method.
 	var ctx = $("#myChart").get(0).getContext("2d");
-
 	//This will get the first returned node in the jQuery collection.
 	var myNewChart = new Chart(ctx);
 	var data = {
@@ -69,8 +68,7 @@ function makeLoveGraph(result){
 			}
 		]
 	}
-	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false});
-	ctx.fillText("Freq",0,0);
+	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false,scaleShowGridLines : false});
 }
 function makeHateTable(result){
 	//$('#hateTable')

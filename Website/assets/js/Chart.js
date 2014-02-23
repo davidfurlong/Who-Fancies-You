@@ -411,7 +411,7 @@ window.Chart = function(context){
 					ctx.lineWidth = config.scaleLineWidth;
 					ctx.stroke();
 				}
-
+				
 				if (config.scaleShowLabels){
 					ctx.textAlign = "center";
 					ctx.font = config.scaleFontStyle + " " + config.scaleFontSize + "px " + config.scaleFontFamily;
@@ -568,10 +568,10 @@ window.Chart = function(context){
 			
 		}
 		function drawScale(){
+
 			var rotationDegree = (2*Math.PI)/data.datasets[0].data.length;
 			ctx.save();
 		    ctx.translate(width / 2, height / 2);	
-			
 			if (config.angleShowLineOut){
 				ctx.strokeStyle = config.angleLineColor;		    	    
 				ctx.lineWidth = config.angleLineWidth;
@@ -788,7 +788,7 @@ window.Chart = function(context){
 
 	var Line = function(data,config,ctx){
 		var maxSize, scaleHop, calculatedScale, labelHeight, scaleHeight, valueBounds, labelTemplateString, valueHop,widestXLabel, xAxisLength,yAxisPosX,xAxisPosY, rotateLabels = 0;
-			
+				
 		calculateDrawingSizes();
 		
 		valueBounds = getValueBounds();
@@ -859,6 +859,12 @@ window.Chart = function(context){
 			}
 		}
 		function drawScale(){
+			ctx.fillStyle = "gray";
+			ctx.fillText("# of People",110,10);
+
+			ctx.fillStyle = "gray";
+			ctx.fillText("How much they love you",width,height-40);
+
 			//X axis line
 			ctx.lineWidth = config.scaleLineWidth;
 			ctx.strokeStyle = config.scaleLineColor;
@@ -1282,7 +1288,7 @@ window.Chart = function(context){
 
 	function calculateScale(drawingHeight,maxSteps,minSteps,maxValue,minValue,labelTemplateString){
 			var graphMin,graphMax,graphRange,stepValue,numberOfSteps,valueRange,rangeOrderOfMagnitude,decimalNum;
-			
+
 			valueRange = maxValue - minValue;
 			
 			rangeOrderOfMagnitude = calculateOrderOfMagnitude(valueRange);
