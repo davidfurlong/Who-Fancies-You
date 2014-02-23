@@ -6,6 +6,13 @@ function gearsGrinding(){
 	      	console.log(result);
 	      	changeProgressValue(100);
     		showResults(result);
+
+    		whoDoesntCare(result, function(r2) {
+    			//r2 is who doesn't care
+    			console.log("dont care:");
+    			console.log(r2);
+    		})
+
 	});
 	$('#connectToFacebook').addClass('working');
 	$('#connectToFacebook').val("");

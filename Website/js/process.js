@@ -88,3 +88,7 @@ function mapToList(map) {
   });
   return entryList;
 }
+
+function whoDoesntCare(likescores, callback) {
+  processDontCare(likescores,callback);
+}
