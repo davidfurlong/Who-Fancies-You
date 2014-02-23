@@ -13,6 +13,9 @@ function makeLoveTable(result){
 			else if(v>0.15) prob = "Likely";
 			else if(v>0.10) prob = "Perhaps";
 			else prob = "Unlikely";
+
+			
+			
 			$('#loveTable table').append('<tr><td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/'+result[iter].id+'/picture?type=square&width=200&height=200"/></span>'+result[iter].name+'</td><td>'+prob+'</td></tr>');	
 		}
 	}
