@@ -5,7 +5,6 @@ function gearsGrinding(){
 	      	console.log("FINAL RESULT:");
 	      	console.log(result);
 	      	changeProgressValue(100);
-	      	changeProgressText("Complete");
     		showResults(result);
 	});
 	$('#connectToFacebook').addClass('working');
@@ -28,12 +27,25 @@ function changeProgressValue(v){
 	$('.ui-progress').animate({
     width:c
   }, (v-store)*20, function() {
+  	changeProgressText("Complete");
+  	scrollToResults();
+
   });
 }
 
-function showResults(result){
+function scrollToResults(){
 	//scroll down page
-	$('#resultslink').click();
+	var pos = $('#w').position().top;
+	var body = $("html, body");
+	body.animate({scrollTop:pos}, '500', 'swing', function() { 
+   		
+	});
+}
+
+function showResults(result){
+	
+
+
 	makeLoveTable(result);
 	makeLoveGraph(result);
 	makeHateTable(result);

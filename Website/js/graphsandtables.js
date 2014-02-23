@@ -18,11 +18,11 @@ function makeLoveTable(result){
 	}
 }
 function makeLoveGraph(result){
-	$('#loveGraph')
+	//$('#loveGraph')
 }
 function makeHateTable(result){
-	$('#hateTable')
+	//$('#hateTable')
 }
 function makeHateGraph(result){
-	$('#hateGraph')
+	//$('#hateGraph')
 }
