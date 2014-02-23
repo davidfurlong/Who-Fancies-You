@@ -156,8 +156,27 @@
 	   ref.parentNode.insertBefore(js, ref);
 	  }(document));
 
+	  function logout(){
+	  	FB.logout(function(response) {
+			  $('#connectToFacebook').val("Connect to Facebook");
+			  $('#logout').hide();
+			  $('#progress-container').hide();
+			  $('#loveTable').html('<table></table>');
+			  $('#hateTable').html('<table></table>');
+			  $('#loveGraph').html("");
+			  $('#hateGraph').html("");
+			});
+	  }
+
 	  function shareToFacebook(){	
-			FB.ui({
+	  	FB.getLoginStatus(function(response) {
+			  if (response.status === 'connected') {
+			    // the user is logged in and has authenticated your
+			    // app, and response.authResponse supplies
+			    // the user's ID, a valid access token, a signed
+			    // request, and the time the access token 
+			    // and signed request each expire
+			    FB.ui({
 			     method: 'stream.publish',
 			     message: 'Find out what your friends really think of you',
 			     attachment: {
@@ -186,6 +205,13 @@
 			     } */
 			   }
 			 );
+			  } else if (response.status === 'not_authorized') {
+			    // the user is logged in to Facebook, 
+			    // but has not authenticated your app
+			  } else {
+			    // the user isn't logged in to Facebook.
+			  }
+			});
 	  }
 
 	  function connectButton(){
@@ -312,118 +338,6 @@
 		</div><!-- /container -->
 	</div><!-- /dg -->
 	
-	<!--<section id="portfolio" name="portfolio"></section>
-	<div id="portfoliowrap">
-		<div class="container">
-			<table id="tableData">
-				<tr>
-					<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
-					<td>Probability</td>
-				</tr>
-			</table>			
-		</div>
-	</div>
-	-->
-
-	<!-- ========== WHITE SECTION ========== -->
-	
-	<!--<div id="w">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-				<h3> Facebook "Friends" who probably hate you
-				</h3>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
-	
-	<!-- ========== CHARTS - DARK GREY SECTION ========== -->
-	<!--
-	<div id="dg">
-		<div class="container">
-			<div class="row">
-				<h3>Graphs</h3>
-				<br>
-				<br>
-				<div class="col-lg-4">
-					<canvas id="javascript" height="130" width="130"></canvas>
-					<br>
-					<h4>Javascript</h4>
-					<br>
-					<script>
-						var doughnutData = [
-								{
-									value: 70,
-									color:"#f85c37"
-								},
-								{
-									value : 30,
-									color : "#ecf0f1"
-								}
-							];
-							var myDoughnut = new Chart(document.getElementById("javascript").getContext("2d")).Doughnut(doughnutData);
-					</script>
-
-				</div>
-				<div class="col-lg-4">
-					<canvas id="bootstrap" height="130" width="130"></canvas>
-					<br>
-					<h4>Bootstrap</h4>
-					<br>
-					<script>
-						var doughnutData = [
-								{
-									value: 90,
-									color:"#f85c37"
-								},
-								{
-									value : 10,
-									color : "#ecf0f1"
-								}
-							];
-							var myDoughnut = new Chart(document.getElementById("bootstrap").getContext("2d")).Doughnut(doughnutData);
-					</script>
-				</div>
-				<div class="col-lg-4">
-					<canvas id="wordpress" height="130" width="130"></canvas>
-					<br>
-					<h4>Wordpress</h4>
-					<br>
-					<script>
-						var doughnutData = [
-								{
-									value: 55,
-									color:"#f85c37"
-								},
-								{
-									value : 45,
-									color : "#ecf0f1"
-								}
-							];
-							var myDoughnut = new Chart(document.getElementById("wordpress").getContext("2d")).Doughnut(doughnutData);
-					</script>
-				</div>
-			
-			</div>	
-		</div>
-	</div>
-	-->
-	<!--
-	<section id="portfolio" name="portfolio"></section>
-	<div id="portfoliowrap">
-		<div class="container">
-			<table id="tableData">
-				<tr>
-					<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
-					<td>Probability</td>
-				</tr>
-			</table>			
-		</div>
-	</div>
-	-->
-	
 	<!-- ========== WHITE SECTION ========== -->
 	<div id="w" class="share">
 		<div class="container">
@@ -475,7 +389,7 @@
 					<br>
 					<div class="col-lg-6">
 						<h3><b>Send Us A Message:</b></h3>
-						<h3>dvfurlong@gmail.com</h3>
+						<h3><a href="mailto:dvfurlong@gmail.com">dvfurlong@gmail.com</a></h3>
 						<br>
 					</div>
 					
