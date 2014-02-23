@@ -12,6 +12,7 @@ function gearsGrinding(){
                 for(i in result) {
                 	if(gopp(gmap[result[i].id]) == myGender)
                 	{
+                		result[i].oscore = result[i].score;
                 		result[i].score = 1 - ((1 - result[i].score) * 0.7);
                 	} 
                 }
