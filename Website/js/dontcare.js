@@ -21,13 +21,7 @@ function processFriends(resp) {
     if (typeof ls[friends[i].id] == "undefined") {
       numProc += 1;
       count += 1;
-      FB.api('/me/mutualfriends/' + friends[i].id, function(r) { 
-        mutfriends[friends[i].id] = { id: friends[i].id, name:friends[i].name, score: r.data.length };
-        if(r.data.length > largest)
-          largest = r.data.length;
-        numProc -= 1;
-        checkDone();
-      });
+      FB.api('/me/mutualfriends/' + friends[i].id, mutFriend(friends[i].id, friends[i].name));
       if(count == 30)
         break;
     }
@@ -35,6 +29,16 @@ function processFriends(resp) {
   pdone = true;
   checkDone();
 }
+
+function mutFriend(iid,iname) {
+    return function(r) { 
+        mutfriends[iid] = { id: iid, name:iname, score: r.data.length };
+        if(r.data.length > largest)
+          largest = r.data.length;
+        numProc -= 1;
+        checkDone();
+      }
+};
 
 
 function checkDone() {
