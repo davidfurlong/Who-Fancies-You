@@ -1,6 +1,6 @@
 #connectToFacebook {
 	padding-top:3px;
-	margin-top:40px;
+	margin-top:30px;
 	height:60px;
 	width:324px;
 	font-family:helvetica;
@@ -77,15 +77,19 @@ h1 {
 }
 
 #tableData tr {
-	border-top:1px solid white;
+	//border-top:1px solid white;
 }
 #tableData tr:first-child {
-	border-top:0px solid white;
+	//border-top:0px solid white;
 }
 
 tr td:first-child {
 	//border-right:1px solid white;
 	width:80%;
+}
+
+td {
+	text-align:left;
 }
 
 .row h3 {

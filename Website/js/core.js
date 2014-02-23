@@ -4,13 +4,14 @@ function gearsGrinding(){
 	whoLikesMe(function(result) {
 	      	console.log("FINAL RESULT:");
 	      	console.log(result);
+	      	changeProgressValue(100);
+	      	changeProgressText("Complete");
+    		showResults(result);
 	});
 	$('#connectToFacebook').addClass('working');
 	$('#connectToFacebook').val("");
 
 	changeProgressText('Crunching');
-	changeProgressValue(50);
-	changeProgressValue(100);
 
 }
 
@@ -26,13 +27,15 @@ function changeProgressValue(v){
 	var c = 3*v;
 	$('.ui-progress').animate({
     width:c
-  }, (v-store)*60, function() {
-    if(v>=100)
-    	showResults();
+  }, (v-store)*20, function() {
   });
 }
 
-function showResults(){
+function showResults(result){
 	//scroll down page
-
+	$('#resultslink').click();
+	makeLoveTable(result);
+	makeLoveGraph(result);
+	makeHateTable(result);
+	makeLoveGraph(result);
 }
