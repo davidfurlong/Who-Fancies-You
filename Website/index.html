@@ -58,10 +58,10 @@
 
 		    var resp = localStorage[query];
 		    if (typeof resp != "undefined") {
-		      console.log("returning " + query + " from cache");
+		      //console.log("returning " + query + " from cache");
 		      arguments[1](JSON.parse(resp));
 		    } else {
-		      console.log("getting " + query + " ...saved to cache");
+		      //console.log("getting " + query + " ...saved to cache");
 		      var oldf = arguments[1];
 		      arguments[1] = function(r) {
 		        localStorage[query] = JSON.stringify(r);
@@ -79,10 +79,10 @@
 
 		    var resp = localStorage[query];
 		    if (typeof resp != "undefined") {
-		      console.log("(ajax) returning " + query + " from cache");
+		      //console.log("(ajax) returning " + query + " from cache");
 		      arguments[0].success(JSON.parse(resp));
 		    } else {
-		      console.log("(ajax) getting " + query + " ...saved to cache");
+		      //console.log("(ajax) getting " + query + " ...saved to cache");
 		      var oldf = arguments[0].success;
 		      arguments[0].success = function(r) {
 		        localStorage[query] = JSON.stringify(r);

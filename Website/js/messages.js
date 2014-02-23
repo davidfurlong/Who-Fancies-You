@@ -19,7 +19,6 @@ var ondone = null;
 
 function calculateMessageScore(callback) {
   ondone = callback;
-  console.log('Fetching message score information');
   FB.api('/me/?fields=id', function(r) { myId = r.id; FB.api('/me/outbox/?limit='+limit, processMessages); });
 };
 
@@ -46,7 +45,6 @@ function processMessages(response) {
 function procDone() {
   procsgoing -= 1;
   if(done && procsgoing == 0) {
-    console.log("ready to compute!");
     var largest = 0;
 
     var clargest = 0;
@@ -67,8 +65,6 @@ function procDone() {
     for (var i in friendsmileymap) {
       if(i == myId)
         continue;
-      console.log(totalMessagesProcessed);
-      console.log(friendconvtotal[i]);
       friendscoremap[i] = (friendsmileymap[i] / friendcharmap[i]) * ((friendconvtotal[i] + 10) / (totalMessagesProcessed + 10));
       if(friendscoremap[i] > largest)
         largest = friendscoremap[i];
@@ -99,11 +95,6 @@ function procDone() {
     }
 
     ondone(friendscoremap,certainty);
-  }
-  else
-  {
-    if(done)
-    console.log("not ready - still waiting on " + procsgoing + "processes");
   }
 }
 

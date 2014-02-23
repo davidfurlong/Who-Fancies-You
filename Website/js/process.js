@@ -18,16 +18,22 @@ function whoLikesMe(callback) {
   });
 
   processStatuses(function(result) {
+    console.log("statuses");
+    console.log(result);
     results.push({map: result, weight: STATUSES_WEIGHT});
     console.log("Statuses returned");
     latch.complete();
   });
   processPhotos(function(result) {
+    console.log("photos");
+    console.log(result);
     results.push({map: result, weight: PHOTOS_WEIGHT});
     console.log("Photos returned");
     latch.complete();
   });
   calculateMessageScore(function(result, certainty) {
+    console.log("messages");
+    console.log(result);
     results.push({map: result, weight: MESSAGES_WEIGHT});
     console.log("Messages returned");
     latch.complete();
@@ -38,7 +44,9 @@ function mergeCollections(c1, c2, weight) {
   var result = c1;
   _.each(c2, function(value, key) {
     if (typeof c1[key] != "undefined") {
-      result[key].score = c1[key] + value.score * weight;
+      result[key].score = c1[key].score + value.score * weight;
+      console.log(result[key].score);
+
     } else {
       result[key] = {name: value.name};
       result[key].score = value.score * weight;
