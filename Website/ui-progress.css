@@ -106,6 +106,7 @@ background: linear-gradient(to bottom, #e6f0a3 0%,#d2e638 50%,#c3d825 51%,#dbf04
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f0a3', endColorstr='#dbf043',GradientType=0 );
   /* Give it a higher contrast outline */
   /* Animate */
+
   -moz-animation: animate-stripes 2s linear infinite;
   -webkit-animation: animate-stripes 2s linear infinite;
   -o-animation: animate-stripes 2s linear infinite;

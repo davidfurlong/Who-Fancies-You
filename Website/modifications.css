@@ -15,6 +15,20 @@
 
 }
 
+#dg .container .row:first-child div:first-child {
+	border-right:1px dashed gray;
+} 
+
+#loveTable {
+	padding-right:30px;
+}
+#hateTable {
+	padding-left:30px;
+}
+
+#loveTable table tr td:nth-child(4) {
+	text-align:right;
+}
 
 h1 {
 	margin-top:80px !important;
@@ -77,19 +91,19 @@ table {
 table tr {
 	//border-top:1px solid white;
 }
-table tr:first-child td:first-child img {
+table tr:first-child td:nth-child(2) {
 	//border-top:0px solid white;
-	border:2px solid #ffd700;
+	color:#DAA520;
 }
 
-table tr:nth-child(2) td:first-child img {
+table tr:nth-child(2) td:nth-child(2) {
 	//border-top:0px solid white;
-	border:2px solid silver;
+	color:#AFAFAF;
 }
 
-table tr:nth-child(3) td:first-child img {
+table tr:nth-child(3) td:nth-child(2) {
 	//border-top:0px solid white;
-	border:2px solid #cd7f32;
+	color:#cd7f32;
 }
 
 tr td:first-child {
@@ -138,8 +152,8 @@ img {
 	display: inline-block;
 	max-width: 100%;
 	vertical-align: middle;
-	//width:40px;
-	//height:40px;
+	width:43px;
+	height:43px;
 	//overflow:hidden;
 }
 
@@ -156,7 +170,7 @@ img {
 	vertical-align: bottom;
 }
 /* image-wrap:after pseudo element (overlaying container) */
-.person-pic-wrapper:after {
+/*.person-pic-wrapper:after {
 	content: ' ';
 	width: 100%;
 	height: 100%;
@@ -173,8 +187,8 @@ img {
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;
 	border-radius: 7px;
-	*/
-}
+	
+}*/
 .person-pic-wrapper img {
 	vertical-align: bottom;
 	/*
@@ -186,8 +200,25 @@ img {
 	border-radius: 6px;
 	*/
 }
-/* soft embossed */
+
+.person-pic-wrapper:before {
+	position: absolute;
+	content: ' ';
+	width: 100%;
+	height: 50%;
+	top: 0;
+	left: 0;
+	-webkit-border-top-left-radius: 7px;
+	-webkit-border-top-right-radius: 7px;
+	-moz-border-radius-topleft: 7px;
+	-moz-border-radius-topright: 7px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	background: -moz-linear-gradient(top, rgba(255,255,255,0.6) 0%, rgba(255,255,255,.15) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.6)), color-stop(100%,rgba(255,255,255,.15)));
+	background: linear-gradient(top, rgba(255,255,255,0.6) 0%,rgba(255,255,255,.15) 100%);
+}
 
 .share {
-	background: url('assets/img/green-fibers.png') !important;
+	background: url('assets/img/vertical_cloth.png') !important;
 }
