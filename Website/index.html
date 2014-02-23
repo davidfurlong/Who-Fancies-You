@@ -25,7 +25,9 @@
 	<script src="assets/js/underscore.js"></script>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
-	<script src="assets/js/Chart.js"></script>	
+	<script src="assets/js/Chart.js"></script>
+	<script src="assets/js/Chart2.js"></script>	
+	
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
@@ -42,7 +44,9 @@
 
   <body data-spy="scroll" data-offset="0" data-target="#theMenu">
 	  <div id="fb-root"></div>
-
+	<div id="logout menuToggle">
+		Logout
+		</div>
 	<script>
 	  window.fbAsyncInit = function() {
 	  FB.init({
@@ -112,12 +116,11 @@
 	      console.log('Not Authorized');
 	      $('#connectToFacebook').val("Connect to Facebook");
 
-
 		    FB.login(function(response) {
 	   			// handle the response
 	   			gearsGrinding();
 
-			 	}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
+			 	}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos,  publish_actions, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos'
 			 	});
 		
 
@@ -135,7 +138,7 @@
 	   			// handle the response
 	   			gearsGrinding();
 
-		 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
+		 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos,  publish_actions, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos'
 		 		});
 		  
 	    }
@@ -153,8 +156,27 @@
 	   ref.parentNode.insertBefore(js, ref);
 	  }(document));
 
+	  function logout(){
+	  	FB.logout(function(response) {
+			  $('#connectToFacebook').val("Connect to Facebook");
+			  $('#logout').hide();
+			  $('#progress-container').hide();
+			  $('#loveTable').html('<table></table>');
+			  $('#hateTable').html('<table></table>');
+			  $('#loveGraph').html("");
+			  $('#hateGraph').html("");
+			});
+	  }
+
 	  function shareToFacebook(){	
-			FB.ui({
+	  	FB.getLoginStatus(function(response) {
+			  if (response.status === 'connected') {
+			    // the user is logged in and has authenticated your
+			    // app, and response.authResponse supplies
+			    // the user's ID, a valid access token, a signed
+			    // request, and the time the access token 
+			    // and signed request each expire
+			    FB.ui({
 			     method: 'stream.publish',
 			     message: 'Find out what your friends really think of you',
 			     attachment: {
@@ -183,6 +205,13 @@
 			     } */
 			   }
 			 );
+			  } else if (response.status === 'not_authorized') {
+			    // the user is logged in to Facebook, 
+			    // but has not authenticated your app
+			  } else {
+			    // the user isn't logged in to Facebook.
+			  }
+			});
 	  }
 
 	  function connectButton(){
@@ -200,7 +229,7 @@
 				      // The person cancelled the login dialog
 				    }
 		   			
-			 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
+			 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos,  publish_actions, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos'
 			 		});
 			  } 
 			  else {
@@ -213,7 +242,7 @@
 				      // The person cancelled the login dialog
 				    }
 		   			
-			 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos, manage_friendlists, publish_actions, read_friendlists, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos, xmpp_login'
+			 		}, {scope: 'basic_info, friends_about_me, friends_photos friends_relationship_details, friends_relationships, friends_status, friends_videos,  publish_actions, read_mailbox, status_update, user_friends, user_likes, user_photos, user_status, user_videos'
 			 		});
 			  }
 			});
@@ -221,9 +250,10 @@
 	</script>
 	<script src="js/core.js"></script>
 
-	<!-- Menu -->
-	<nav class="menu" id="theMenu">
-		<div class="menu-wrap">
+	<!-- Menu 
+	<div class="menuToggle" id="logout">
+		Logout-->
+		<!--<div class="menu-wrap">
 			<h1 class="logo"><a href="index.html#home">Who Likes you?</a></h1>
 			<i class="icon-remove menu-close"></i>
 			<a href="#home" class="smoothScroll">Home</a>
@@ -234,11 +264,11 @@
 			<a href="#"><i class="icon-twitter"></i></a>
 			<a href="#"><i class="icon-dribbble"></i></a>
 			<a href="#"><i class="icon-envelope"></i></a>
-		</div>
+		</div>-->
 		
 		<!-- Menu button -->
 		<!--<div id="menuToggle"><i class="icon-reorder"></i></div>-->
-	</nav>
+	<!--</div>-->
 
 
 	
@@ -279,57 +309,23 @@
 				<h3> Who <span style="color:#333">Loves</span> you</h3>
 				</div>
 				<div class="col-lg-6">
-				<h3><span style="color:#333">Who?</span></h3>
+				<h3> Who <span style="color:#333">doesn't care</span> about you</h3>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	
-	<!-- ========== SERVICES - GREY SECTION ========== -->
-	<!--
-	<section id="services" name="press"></section>
-	<div id="g">
-		<div class="container">
-			<div class="row">
-				<h3>OUR SERVICES</h3>
-				<br>
-				<br>
-				<div class="col-lg-3">
-					<img src="assets/img/s1.png">
-					<h4>London</h4>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
-				</div>
-				<div class="col-lg-3">
-					<img src="assets/img/s2.png">
-					<h4>Berlin</h4>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
-				</div>
-				<div class="col-lg-3">
-					<img src="assets/img/s3.png">
-					<h4>Paris</h4>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
-				</div>
-				<div class="col-lg-3">
-					<img src="assets/img/s4.png">
-					<h4>Tokyo</h4>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
-	
+
 	<!-- ========== CHARTS - DARK GREY SECTION ========== -->
 	<div id="dg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6" id="loveTable">
-					<table id="tableData">
+					<table>
 					</table>
 				</div>
 				<div class="col-lg-6" id="hateTable">
-					<table id="tableData">
+					<table>
 					</table>
 				</div>
 			</div>	
@@ -341,118 +337,6 @@
 			</div>
 		</div><!-- /container -->
 	</div><!-- /dg -->
-	
-	<!--<section id="portfolio" name="portfolio"></section>
-	<div id="portfoliowrap">
-		<div class="container">
-			<table id="tableData">
-				<tr>
-					<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
-					<td>Probability</td>
-				</tr>
-			</table>			
-		</div>
-	</div>
-	-->
-
-	<!-- ========== WHITE SECTION ========== -->
-	
-	<!--<div id="w">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-				<h3> Facebook "Friends" who probably hate you
-				</h3>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
-	
-	<!-- ========== CHARTS - DARK GREY SECTION ========== -->
-	<!--
-	<div id="dg">
-		<div class="container">
-			<div class="row">
-				<h3>Graphs</h3>
-				<br>
-				<br>
-				<div class="col-lg-4">
-					<canvas id="javascript" height="130" width="130"></canvas>
-					<br>
-					<h4>Javascript</h4>
-					<br>
-					<script>
-						var doughnutData = [
-								{
-									value: 70,
-									color:"#f85c37"
-								},
-								{
-									value : 30,
-									color : "#ecf0f1"
-								}
-							];
-							var myDoughnut = new Chart(document.getElementById("javascript").getContext("2d")).Doughnut(doughnutData);
-					</script>
-
-				</div>
-				<div class="col-lg-4">
-					<canvas id="bootstrap" height="130" width="130"></canvas>
-					<br>
-					<h4>Bootstrap</h4>
-					<br>
-					<script>
-						var doughnutData = [
-								{
-									value: 90,
-									color:"#f85c37"
-								},
-								{
-									value : 10,
-									color : "#ecf0f1"
-								}
-							];
-							var myDoughnut = new Chart(document.getElementById("bootstrap").getContext("2d")).Doughnut(doughnutData);
-					</script>
-				</div>
-				<div class="col-lg-4">
-					<canvas id="wordpress" height="130" width="130"></canvas>
-					<br>
-					<h4>Wordpress</h4>
-					<br>
-					<script>
-						var doughnutData = [
-								{
-									value: 55,
-									color:"#f85c37"
-								},
-								{
-									value : 45,
-									color : "#ecf0f1"
-								}
-							];
-							var myDoughnut = new Chart(document.getElementById("wordpress").getContext("2d")).Doughnut(doughnutData);
-					</script>
-				</div>
-			
-			</div>	
-		</div>
-	</div>
-	-->
-	<!--
-	<section id="portfolio" name="portfolio"></section>
-	<div id="portfoliowrap">
-		<div class="container">
-			<table id="tableData">
-				<tr>
-					<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>Person 1</td>
-					<td>Probability</td>
-				</tr>
-			</table>			
-		</div>
-	</div>
-	-->
 	
 	<!-- ========== WHITE SECTION ========== -->
 	<div id="w" class="share">
@@ -505,7 +389,7 @@
 					<br>
 					<div class="col-lg-6">
 						<h3><b>Send Us A Message:</b></h3>
-						<h3>dvfurlong@gmail.com</h3>
+						<h3><a href="mailto:dvfurlong@gmail.com">dvfurlong@gmail.com</a></h3>
 						<br>
 					</div>
 					
@@ -536,6 +420,7 @@
 		</div>
 	</div>
 	
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -37,7 +37,7 @@ function checkDone() {
   console.log(pdone)
   if(pdone && numProc == 0) {
     for(i in mutfriends) {
-      mutfriends[i].score = (1 - mutfriends[i].score / largest) * 3 - 2.25; //yay random contants
+      mutfriends[i].score = (1 - mutfriends[i].score / largest) * 4 - 3.1; //yay random contants
     }
     ondone(mutfriends);
   }
