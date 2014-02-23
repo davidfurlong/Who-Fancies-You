@@ -36,7 +36,7 @@ function scrollToResults(){
 	//scroll down page
 	var pos = $('#w').position().top;
 	var body = $("html, body");
-	body.animate({scrollTop:pos}, '800', 'swing', function() { 
+	body.animate({scrollTop:pos}, '650', 'swing', function() { 
    		
 	});
 }
@@ -48,5 +48,5 @@ function showResults(result){
 	makeLoveTable(result);
 	makeLoveGraph(result);
 	makeHateTable(result);
-	makeLoveGraph(result);
+	makeHateGraph(result);
 }

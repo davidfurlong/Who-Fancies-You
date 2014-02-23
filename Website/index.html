@@ -23,6 +23,7 @@
     <link href="assets/css/main.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 	<script src="assets/js/underscore.js"></script>
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 	<script src="assets/js/Chart.js"></script>	
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -30,7 +31,6 @@
       <script src="assets/js/html5shiv.js"></script>
       <script src="assets/js/respond.min.js"></script>
     <![endif]-->
-
 	<script src="js/common.js"></script>
 	<script src="js/statuses.js"></script>
 	<script src="js/photos.js"></script>
@@ -292,55 +292,15 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3" id="loveGraph">
-					<canvas id="javascript" height="130" width="130"></canvas>
-					<br>
-					<h4>Javascript</h4>
-					<br>
-					<script>
-						var doughnutData = [
-								{
-									value: 70,
-									color:"#f85c37"
-								},
-								{
-									value : 30,
-									color : "#ecf0f1"
-								}
-							];
-							var myDoughnut = new Chart(document.getElementById("javascript").getContext("2d")).Doughnut(doughnutData);
-					</script>
-
 				</div>
 				<div class="col-lg-3" id="loveTable">
 					<table id="tableData">
-						
 					</table>
 				</div>
 				<div class="col-lg-3" id="hateGraph">
-					<canvas id="wordpress" height="130" width="130"></canvas>
-					<br>
-					<h4>Wordpress</h4>
-					<br>
-					<script>
-						var doughnutData = [
-								{
-									value: 55,
-									color:"#f85c37"
-								},
-								{
-									value : 45,
-									color : "#ecf0f1"
-								}
-							];
-							var myDoughnut = new Chart(document.getElementById("wordpress").getContext("2d")).Doughnut(doughnutData);
-					</script>
 				</div>
 				<div class="col-lg-3" id="hateTable">
 					<table id="tableData">
-						<tr>
-							<td><span height="auto" width="auto" class="person-pic-wrapper"><img class="person-pic" src="http://graph.facebook.com/535941985/picture?type=square&width=200&height=200"/></span>David Furlong</td>
-							<td>0%</td>
-						</tr>
 					</table>
 				</div>
 			
