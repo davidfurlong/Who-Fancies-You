@@ -112,7 +112,12 @@ function makeHateTable(result){
 */
 }
 function makeHateGraph(result){
-	console.log(result);
+	$('#hateGraph').append("<h3>Processed Data from the last year</h3>");
+	$('#hateGraph').append("<span>Messages   "+totalMessagesProcessed+"</span>");
+	$('#hateGraph').append("<span>Friends  "+totalFriends+"</span>");
+	$('#hateGraph').append("<span>Statuses   "+totalMessagesProcessed+"</span>");
+	$('#hateGraph').append("<span>Likes on your content  "+totalFriends+"</span>");
+	/*console.log(result);
 	var d = [];
 	for(var i=0;i<result.length;i++){
 		if(isNaN(result[i].score))
@@ -161,4 +166,5 @@ function makeHateGraph(result){
 		]
 	}
 	new Chart(ctx).Line(data,{bezierCurve:false,pointDot:false,scaleShowGridLines : false, xAxisLabel : "How much they don't care about you", yAxisLabel : "# of People"});
+*/
 }
