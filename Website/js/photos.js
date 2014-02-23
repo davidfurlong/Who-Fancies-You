@@ -26,7 +26,6 @@ function processPhotos(callback) {
       }
 
       var likes = photo.likes;
-      console.log(likes);
       if (typeof likes != "undefined") {
         totalPhotoLikes += likes.data.length;
         _.each(likes.data, function(like) {
