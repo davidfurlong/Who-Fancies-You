@@ -69,7 +69,7 @@ function whoLikesMe(callback) {
     results.push({map: result, weight: STATUSES_WEIGHT});
     console.log("Statuses returned");
     progress += 20;
-    //changeProgressValue(progress);
+    changeProgressValue(50);
     latch.complete();
   });
   processPhotos(function(likeResult, inverseHateResult) {
@@ -78,7 +78,7 @@ function whoLikesMe(callback) {
     latch.complete();
     ihr = inverseHateResult;
     progress += 20;
-    //changeProgressValue(progress);
+    changeProgressValue(50);
   });
   calculateMessageScore(function(result, certainty) {
     console.log("Messages returned");

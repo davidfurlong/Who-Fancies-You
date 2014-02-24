@@ -2,6 +2,7 @@ var lastProgressValue = 0;
 
 function gearsGrinding(){
 	whoLikesMe(function(result, badResult) {
+			changeProgressValue(80);
 	      	console.log("FINAL RESULT IS IN!");
 
     		whoDoesntCare(result, function(r2) {
@@ -20,6 +21,7 @@ function gearsGrinding(){
 	$('#connectToFacebook').val("");
 
 	changeProgressText('Crunching');
+	changeProgressValue(10);
 }
 
 function changeProgressText(t){
