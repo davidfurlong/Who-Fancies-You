@@ -106,6 +106,7 @@ function procDone() {
 }
 
 function processConversation(conv) {
+if(typeof conv.from != "undefined")
   processMessage(conv.from,conv.message); //the first message
   if(typeof conv.comments == "undefined")
     return;
@@ -143,6 +144,7 @@ function processComments(comments)
         }
     }
     var comment = obj[i];
+    if(typeof comment.from != undefined)
     processMessage(comment.from,comment.message)
     prevdate = newDate;
   }
